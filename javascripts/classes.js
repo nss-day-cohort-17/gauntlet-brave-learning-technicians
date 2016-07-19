@@ -12,7 +12,7 @@ var Gauntlet = function (g) {
       load (callBack) {
         return new Promise((resolve, reject) => {
           $.ajax({url: "./data/classes.json"}).done((response) => {
-            response.classes.forEach(($class) => {
+            response.classes.each(($class) => {
               // Define the prototype for the new profession
               let prototypeForObject = ($class.prototype === null) ? {} : _professions.get($class.prototype);
 
@@ -20,10 +20,10 @@ var Gauntlet = function (g) {
               let profession = Object.create(prototypeForObject);
 
               // Add all properties from JSON definition of profession
-              Object.keys($class).filter((k) => k !== "prototype").forEach((property) => {
-                defineProperty(profession, property, $class[property]);
+              Object.keys($class).filter((k) => k !== "prototype").each((p) => {
+                __.property(profession, p, $class[p]);
               });
-              defineProperty(profession, "toString", () => $class.label);
+              __.property(profession, "toString", () => $class.label);
 
               // Add new profession to the Map
               _professions.set($class.id, profession);

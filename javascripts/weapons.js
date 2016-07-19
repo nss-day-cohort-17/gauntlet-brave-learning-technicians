@@ -1,8 +1,14 @@
 "use strict";
 
 var Gauntlet = function (g) {
-  var Weapon = Object.create(null);
 
+  // Base Weapon object
+  let Weapon = Object.create(null);
+
+  /*
+    No prototype chain set up in the JSON file. Each subsequent weapon
+    will directly inherit from Weapon, so set its prototype here.
+   */
   Weapon.prototype = {
     id: "nothing",
     label: "bare hands",
@@ -16,25 +22,29 @@ var Gauntlet = function (g) {
     return this.label;
   };
 
+  // WeaponRack will hold all defined weapons
   g.WeaponRack = function () {
-    var weaponList = {};
+    let weaponList = {};
 
     return {
+
+      // Method to return the entire collection of weapons
       weapons () {
         return weaponList;
       },
-      load () {
 
+      // Method to load the weapons from the JSON file
+      load () {
         return new Promise((resolve, reject) => {
           $.ajax({url: "./data/weapons.json"}).done((response) => {
-            response.weapons.forEach((weapon) => {
-              var currentWeapon;
+            response.weapons.each((weapon) => {
+              let currentWeapon;
 
               weaponList[weapon.id] = Object.create(Weapon.prototype);
               currentWeapon = weaponList[weapon.id];
 
-              Object.keys(weapon).forEach((property) => {
-                defineProperty(currentWeapon, property, weapon[property]);
+              Object.keys(weapon).each((p) => {
+                __.property(currentWeapon, p, weapon[p]);
               });
             });
             resolve(weaponList);
@@ -42,11 +52,11 @@ var Gauntlet = function (g) {
             reject(msg);
           });
         });
-   
+
       }
     }
   }();
 
   return g;
-  
+
 }(Gauntlet || {});

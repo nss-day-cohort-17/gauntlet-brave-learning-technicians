@@ -1,54 +1,53 @@
 "use strict";
 
-var Gauntlet = function (g) {
+var Gauntlet = function ($$gauntlet) {
 
-  g.Horde = function () {
-    let _battalion = new Map();
+  $$gauntlet.Horde = function () {
+    let _horde = new Map();
 
     return {
       soldier (type) {
-        let soldier = Object.create(_battalion.get(type));
+        let soldier = Object.create(_horde.get(type));
         return soldier;
       },
       random () {
         let enemies = [];
-        for (let key of _battalion.keys()) {
+        for (let key of _horde.keys()) {
           // Monster is the base class. Don't want to create instances of it.
           if (key !== "Monster") {
             enemies.push(key);
           }
         }
         let randomPosition = Math.round(Math.random() * (enemies.length - 1));
-        let randomSoldier = _battalion.get(enemies[randomPosition]);
+        let randomSoldier = _horde.get(enemies[randomPosition]);
         let returnObject = Object.create(randomSoldier);
         return returnObject;
       },
       load () {
         return new Promise((resolve, reject) => {
-          let _platoon = new Map();
-
-          $.ajax({url: "./data/horde.json"}).done((response) => {
-            response.classes.forEach(($monster) => {
-              let prototypeForObject;
+          $.ajax({url: "./data/horde.json"}).done(response => {
+            response.classes.each(monster => {
+              let objectPrototype;
 
               // The base monster will always have Player as its prototype
-              if ($monster.prototype === null) {
-                prototypeForObject = g.Army.troops()["Player"].prototype;
+              if (monster.prototype === null) {
+                objectPrototype = $$gauntlet.Army.Player;
               } else  {
-                prototypeForObject = _battalion.get($monster.prototype);
+                objectPrototype = _horde.get(monster.prototype);
               };
 
-              let monsterForMap = Object.create(prototypeForObject);
-              Object.keys($monster).filter((k) => k !== "prototype").forEach((property) => {
-                defineProperty(monsterForMap, property, $monster[property]);
+              // Create a new object for the current monster based on corresponding prototype
+              let monsterForMap = Object.create(objectPrototype);
+              Object.keys(monster).filter(k => k !== "prototype").each(p => {
+                __.property(monsterForMap, p, monster[p]);
               });
-              defineProperty(monsterForMap, "species", $monster["id"]);
+              __.property(monsterForMap, "species", monster["id"]);
 
-              _battalion.set($monster.id, monsterForMap);
+              _horde.set(monster.id, monsterForMap);
             });
 
             // Resolve the promise
-            resolve(_battalion);
+            resolve(_horde);
 
           }).fail((xhr, error, msg) => {
             console.error(msg);
@@ -58,6 +57,6 @@ var Gauntlet = function (g) {
     }
   }();
 
-  return g;
+  return $$gauntlet;
 
 }(Gauntlet || {});

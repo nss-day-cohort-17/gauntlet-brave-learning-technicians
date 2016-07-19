@@ -1,13 +1,14 @@
 "use strict";
 
+/*
+  Use promises to load, in the correct order, the JSON files
+  needed to establish all the prototype chains needed.
+ */
 Gauntlet.WeaponRack.load().then((weapons) => {
   return Gauntlet.Horde.load();
 }).then((classes) => {
   return Gauntlet.GuildHall.load();
 }).then(() => {
-
-Gauntlet.GuildHall.load();
-
 
   /*
     Test code to generate a human player and a random enemy
@@ -16,7 +17,7 @@ Gauntlet.GuildHall.load();
 
   console.group("Sample Combatants");
   console.log("Creating a new Human instance");
-  let warrior = Gauntlet.Army.troops()["Human"].init("Joe");
+  let warrior = Gauntlet.Army.Human.init("Joe");
   warrior.equip();
   console.log(warrior.toString());
   console.log(" ");
@@ -86,7 +87,7 @@ $(document).ready(function() {
             let block = ['<div class="row weapons">',
                          '<div class="col-sm-6">'];
 
-            chosenProfession.allowedWeapons.forEach(function(weapon, index) {
+            chosenProfession.allowedWeapons.each(function(weapon, index) {
               let weaponName = Gauntlet.WeaponRack.weapons()[weapon].toString();
 
               // Close individual rows and start new ones

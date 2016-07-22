@@ -86,8 +86,11 @@ $(document).ready(function() {
             let block = ['<div class="row weapons">',
                          '<div class="col-sm-6">'];
 
-            chosenProfession.allowedWeapons.each(function(weapon, index) {
-              let weaponName = Gauntlet.WeaponRack.weapons()[weapon].toString();
+            chosenProfession.allowedWeapons.each((weapon, index) => {
+              let weaponName = Gauntlet.WeaponRack
+                                       .weapons()
+                                       .find(w => w.id === weapon)
+                                       .toString();
 
               // Close individual rows and start new ones
               if (index === 3) {
@@ -180,7 +183,7 @@ $(document).ready(function() {
     Handle user choosing a profession for the human combatant
    */
   $(".class__link").click(function(e) {
-    HumanCombatant = Gauntlet.Army.troops()["Human"].init($("#player-name").val());
+    HumanCombatant = Gauntlet.Army.Human.init($("#player-name").val());
     chosenProfession = Gauntlet.GuildHall.classes().get($(this).children(".btn__text").html());
   });
 

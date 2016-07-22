@@ -10,7 +10,20 @@ var Gauntlet = function ($$gauntlet) {
     hands: 2,
     ranged: false,
     poisoned: false,
-    toString () { return `fearsome ${this.label}`; }
+    swing (modifier) {
+      this.strength_modifier = modifier / 10;
+      return this;
+    },
+    at (target) {
+      let damage = Math.round(Math.random() * this.base_damage + 1);
+      console.log("damage", damage, this.strength_modifier, target.protection);
+      damage += this.strength_modifier - target.protection;
+      damage = (damage < 0) ? 0 : damage;
+      target.health -= damage;
+
+      return `${ this.label } hit ${target.name} for ${ damage } damage.`;
+    },
+    toString () { return `${this.label}`; }
   };
 
   // WeaponRack will hold all defined weapons

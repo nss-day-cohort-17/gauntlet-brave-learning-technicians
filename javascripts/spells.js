@@ -10,7 +10,11 @@ var Gauntlet = function ($$gauntlet) {
     target: null,
     elements: ["lightning", "fire", "water", "earth", "mysticism"],
     toString () {
-      return `${ this.label } of ${ this.elements.random() } modified ${this.target.name}'s ${this.affected_trait} by ${this.effect}`;
+      return `${ this.label } of ${ this.elements.random() }`;
+    },
+    read (modifier) {
+      this.intelligenceModifier = modifier;
+      return this;
     },
     cast () {
       this.effect = Math.round(Math.random() * this.base_effect + this.effect_modifier);
@@ -18,8 +22,9 @@ var Gauntlet = function ($$gauntlet) {
     },
     at (target) {
       this.target = target;
-      target[this.affected_trait] += this.effect * ((this.augment) ? 1 : -1);
-      return this;
+      // TODO: Add critical chance
+      target[this.affected_trait] += (this.effect * ((this.augment) ? 1 : -1)) + (this.intelligenceModifier || 0);
+      return `${ this.label } of ${ this.elements.random() } modified ${this.target.name}'s ${this.affected_trait} by ${this.effect}`;
     }
   };
 

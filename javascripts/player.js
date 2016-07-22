@@ -44,9 +44,9 @@ var Gauntlet = function ($$gauntlet) {
 
     // Compose a profession
     if (!profession) {
-      this.generateClass();
+      this.setProfession();
     } else {
-      this.setClass(profession);
+      this.setProfession(profession);
     }
 
     // Use the stat modifiers for the species
@@ -58,11 +58,7 @@ var Gauntlet = function ($$gauntlet) {
 
     // Compose a weapon
     if (!this.profession.magical) {
-      if (!weapon) {
-        this.generateWeapon();
-      } else {
-        this.setWeapon(weapon);
-      }
+      this.setWeapon(weapon);
     }
 
     this.setSkin();
@@ -88,35 +84,33 @@ var Gauntlet = function ($$gauntlet) {
     return this;
   });
 
-  __.def(_player, "generateClass", function () {
-    // Composes the corresponding _player class into the _player object
-    this.setClass($$gauntlet.GuildHall.classes().get(this.allowedClasses.random()));
-  });
+  __.def(_player, "setProfession", function(profession) {
 
-  __.def(_player, "setClass", function(newClass) {
-    this.profession = newClass;
-
-    this.modifyHealth(newClass.healthModifier)
-        .modifyStrength(newClass.strengthModifier)
-        .modifyIntelligence(newClass.intelligenceModifier);
-
-    return this;
-  });
-
-  __.def(_player, "generateWeapon", function() {
-    try {
-      if (this.profession && !this.profession.magical) {
-        this.setWeapon($$gauntlet.WeaponRack.weapons().random());
-      }
-    } catch (ex) {
-      console.log("this.profession.allowedWeapons", this.profession.allowedWeapons);
+    if (!profession) {
+      this.profession = $$gauntlet.GuildHall.classes().get(this.allowedClasses.random());
+    } else {
+      this.profession = profession;
     }
+
+    this.modifyHealth(this.profession.healthModifier)
+        .modifyStrength(this.profession.strengthModifier)
+        .modifyIntelligence(this.profession.intelligenceModifier);
 
     return this;
   });
 
   __.def(_player, "setWeapon", function(newWeapon) {
-    this.weapon = newWeapon;
+
+    try {
+      if (this.profession && !this.profession.magical && !newWeapon) {
+        this.weapon = $$gauntlet.WeaponRack.weapons().random();
+      } else if (newWeapon) {
+        this.weapon = newWeapon;
+      }
+    } catch (ex) {
+      console.log("this.profession.allowedWeapons", this.profession.allowedWeapons);
+    }
+
     return this;
   });
 

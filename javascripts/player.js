@@ -51,9 +51,9 @@ var Gauntlet = function ($$gauntlet) {
 
     // Use the stat modifiers for the species
     if ("healthModifier" in this) {
-      this.modifyHealth(this.healthModifier);
-      this.modifyStrength(this.strengthModifier);
-      this.modifyIntelligence(this.intelligenceModifier);
+      this.modifyHealth(this.healthModifier)
+          .modifyStrength(this.strengthModifier)
+          .modifyIntelligence(this.intelligenceModifier);
     }
 
     // Compose a weapon
@@ -67,62 +67,62 @@ var Gauntlet = function ($$gauntlet) {
 
     this.setSkin();
 
+    return this;
   });
 
   __.def(_player, "modifyHealth", function(bonus) {
     this.health += bonus;
     if (this.health < 20) this.health = 20;
+    return this;
   });
 
   __.def(_player, "modifyStrength", function(bonus) {
     this.strength += bonus;
     if (this.strength < 10) this.strength = 10;
+    return this;
   });
 
   __.def(_player, "modifyIntelligence", function(bonus) {
     this.intelligence += bonus;
     if (this.intelligence < 10) this.intelligence = 10;
+    return this;
   });
 
   __.def(_player, "generateClass", function () {
-    // Get a random index from the allowed classes array
-    let random = Math.round(Math.random() * (this.allowedClasses.length - 1));
-
-    // Get the string at the index
-    let randomClassName = this.allowedClasses[random];
-    let randomClass = $$gauntlet.GuildHall.classes().get(randomClassName);
-
     // Composes the corresponding _player class into the _player object
-    this.setClass(randomClass);
+    this.setClass($$gauntlet.GuildHall.classes().get(this.allowedClasses.random()));
   });
 
   __.def(_player, "setClass", function(newClass) {
     this.profession = newClass;
 
-    this.modifyHealth(newClass.healthModifier);
-    this.modifyStrength(newClass.strengthModifier);
-    this.modifyIntelligence(newClass.intelligenceModifier);
+    this.modifyHealth(newClass.healthModifier)
+        .modifyStrength(newClass.strengthModifier)
+        .modifyIntelligence(newClass.intelligenceModifier);
+
+    return this;
   });
 
   __.def(_player, "generateWeapon", function() {
     try {
       if (this.profession && !this.profession.magical) {
-        let random = Math.round(Math.random() * (this.profession.allowedWeapons.length - 1));
-        let weapon = this.profession.allowedWeapons[random];
-        this.setWeapon($$gauntlet.WeaponRack.weapons()[weapon]);
+        this.setWeapon($$gauntlet.WeaponRack.weapons().random());
       }
     } catch (ex) {
       console.log("this.profession.allowedWeapons", this.profession.allowedWeapons);
     }
+
+    return this;
   });
 
   __.def(_player, "setWeapon", function(newWeapon) {
     this.weapon = newWeapon;
+    return this;
   });
 
   __.def(_player, "setSkin", function() {
-    let randomSkin = Math.round(Math.random() * (this.skinColors.length-1));
-    this.skinColor = this.skinColors[randomSkin];
+    this.skinColor = this.skinColors.random();
+    return this;
   });
 
 
@@ -145,7 +145,7 @@ var Gauntlet = function ($$gauntlet) {
     return this;
   });
 
-
+  // Attach the army to the global gauntlet object
   $$gauntlet.Army = _army;
 
   return $$gauntlet;

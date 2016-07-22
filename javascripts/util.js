@@ -6,9 +6,17 @@
       return _target.apply(_this, _args);
     }
   });
+
+  Array.prototype.random = function () {
+    return this[Math.round(Math.random() * (this.length - 1))];
+  }
 })();
 
 const __ = (__ => {
+  __.compose = function (target, ...args) {
+    args.each(arg => target = Object.assign(target, arg));
+  };
+
   __.property = new Proxy(Object.defineProperty, {
     apply: function (_target, _this, _args) {
       return _target(_args[0], _args[1], {

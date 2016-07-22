@@ -37,12 +37,12 @@ var Gauntlet = function ($$gauntlet) {
               };
 
               // Create a new object for the current monster based on corresponding prototype
-              let monsterForMap = Object.create(objectPrototype);
-              Object.keys(monster).filter(k => k !== "prototype").each(p => {
-                __.property(monsterForMap, p, monster[p]);
-              });
+              let monsterForMap = Object.assign(Object.create(objectPrototype), monster);
+
+              // Add on a new species property, pulled from the object's id property
               __.property(monsterForMap, "species", monster["id"]);
 
+              // Add new monster to the _horde Map
               _horde.set(monster.id, monsterForMap);
             });
 

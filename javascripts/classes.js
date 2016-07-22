@@ -1,8 +1,8 @@
 "use strict";
 
-var Gauntlet = function (g) {
+var Gauntlet = function ($$gauntlet) {
 
-  g.GuildHall = function () {
+  $$gauntlet.GuildHall = function () {
     let _professions = new Map();
 
     return {
@@ -11,22 +11,22 @@ var Gauntlet = function (g) {
       },
       load (callBack) {
         return new Promise((resolve, reject) => {
-          $.ajax({url: "./data/classes.json"}).done((response) => {
-            response.classes.each(($class) => {
+          $.ajax({url: "./data/classes.json"}).done(response => {
+
+            // Iterate over all the class objects in the JSON file
+            response.classes.each(currentClass => {
+
               // Define the prototype for the new profession
-              let prototypeForObject = ($class.prototype === null) ? {} : _professions.get($class.prototype);
+              let prototypeForObject = (currentClass.prototype === null) ? {} : _professions.get(currentClass.prototype);
 
               // Create the new profession
-              let profession = Object.create(prototypeForObject);
+              let profession = Object.assign(Object.create(prototypeForObject), currentClass);
 
-              // Add all properties from JSON definition of profession
-              Object.keys($class).filter((k) => k !== "prototype").each((p) => {
-                __.property(profession, p, $class[p]);
-              });
-              __.property(profession, "toString", () => $class.label);
+              // Add a toString() method to each class which displays the label
+              __.property(profession, "toString", () => currentClass.label);
 
               // Add new profession to the Map
-              _professions.set($class.id, profession);
+              _professions.set(currentClass.id, profession);
             });
 
             // Resolve the promise
@@ -40,7 +40,7 @@ var Gauntlet = function (g) {
     }
   }();
 
-  return g;
+  return $$gauntlet;
 
 }(Gauntlet || {});
 

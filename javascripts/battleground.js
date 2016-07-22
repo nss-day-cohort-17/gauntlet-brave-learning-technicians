@@ -1,4 +1,4 @@
-let Battleground = function(humanCombatant, enemyCombatant) {
+let Battleground = function (humanCombatant, enemyCombatant) {
   this.human = humanCombatant;
   this.enemy = enemyCombatant;
 };

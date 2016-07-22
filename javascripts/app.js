@@ -4,11 +4,11 @@
   Use promises to load, in the correct order, the JSON files
   needed to establish all the prototype chains needed.
  */
-Gauntlet.WeaponRack.load().then((weapons) => {
-  return Gauntlet.Horde.load();
-}).then((classes) => {
-  return Gauntlet.GuildHall.load();
-}).then(() => {
+Gauntlet.WeaponRack.load()
+  .then(() => Gauntlet.Spellbook.load())
+  .then(() => Gauntlet.Horde.load())
+  .then(() => Gauntlet.GuildHall.load())
+  .then(() => {
 
   /*
     Test code to generate a human player and a random enemy
@@ -17,8 +17,7 @@ Gauntlet.WeaponRack.load().then((weapons) => {
 
   console.group("Sample Combatants");
   console.log("Creating a new Human instance");
-  let warrior = Gauntlet.Army.Human.init("Joe");
-  warrior.equip();
+  let warrior = Gauntlet.Army.Human.init("Joe").equip();
   console.log(warrior.toString());
   console.log(" ");
   console.log("Creating a new Enemy instance");

@@ -1,0 +1,69 @@
+{
+  "spells": [
+    {
+      "id": "Weakness",
+      "label": "weakness",
+      "affected_trait": "strength",
+      "base_effect": 5,
+      "effect_modifier": 5
+    },
+    {
+      "id": "Feeblemind",
+      "label": "feeblemind",
+      "affected_trait": "intelligence",
+      "base_effect": 10,
+      "effect_modifier": 5
+    },
+    {
+      "id": "Shield",
+      "label": "shield",
+      "affected_trait": "protection",
+      "base_effect": 6,
+      "effect_modifier": 6,
+      "augment": true
+    },
+    {
+      "id": "Wall",
+      "label": "wall",
+      "affected_trait": "protection",
+      "base_effect": 20,
+      "effect_modifier": 20,
+      "augment": true
+    },
+    {
+      "id": "MagicDart",
+      "label": "mighty dart",
+      "affected_trait": "health",
+      "base_effect": 2,
+      "effect_modifier": 4
+    },
+    {
+      "id": "Missile",
+      "label": "magic missile",
+      "affected_trait": "health",
+      "base_effect": 5,
+      "effect_modifier": 4
+    },
+    {
+      "id": "Sphere",
+      "label": "rolling sphere",
+      "affected_trait": "health",
+      "base_effect": 3,
+      "effect_modifier": 8
+    },
+    {
+      "id": "Hammer",
+      "label": "giant hammer",
+      "affected_trait": "health",
+      "base_effect": 8,
+      "effect_modifier": 5
+    },
+    {
+      "id": "Bolt",
+      "label": "jagged bolt",
+      "affected_trait": "health",
+      "base_effect": 10,
+      "effect_modifier": 7
+    }
+  ]
+}

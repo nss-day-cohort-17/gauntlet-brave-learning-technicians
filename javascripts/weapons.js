@@ -17,7 +17,7 @@ var Gauntlet = function ($$gauntlet) {
     at (target) {
       let damage = Math.round(Math.random() * this.base_damage + 1);
       console.log("damage", damage, this.strength_modifier, target.protection);
-      damage += this.strength_modifier - target.protection;
+      damage += Math.round(this.strength_modifier - target.protection);
       damage = (damage < 0) ? 0 : damage;
       target.health -= damage;
 

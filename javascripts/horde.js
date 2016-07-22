@@ -20,8 +20,7 @@ var Gauntlet = function ($$gauntlet) {
         }
         let randomPosition = Math.round(Math.random() * (enemies.length - 1));
         let randomSoldier = _horde.get(enemies[randomPosition]);
-        let returnObject = Object.create(randomSoldier);
-        return returnObject;
+        return randomSoldier;
       },
       load () {
         return new Promise((resolve, reject) => {
@@ -39,8 +38,9 @@ var Gauntlet = function ($$gauntlet) {
               // Create a new object for the current monster based on corresponding prototype
               let monsterForMap = Object.assign(Object.create(objectPrototype), monster);
 
-              // Add on a new species property, pulled from the object's id property
+              // Add on a new name and species property, pulled from the object's id property
               __.property(monsterForMap, "species", monster["id"]);
+              __.property(monsterForMap, "name", monster["id"]);
 
               // Add new monster to the _horde Map
               _horde.set(monster.id, monsterForMap);

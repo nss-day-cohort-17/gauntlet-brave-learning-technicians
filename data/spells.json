@@ -5,14 +5,18 @@
       "label": "weakness",
       "affected_trait": "strength",
       "base_effect": 5,
-      "effect_modifier": 5
+      "effect_modifier": 5,
+      "augment": false,
+      "defensive": false
     },
     {
       "id": "Feeblemind",
       "label": "feeblemind",
       "affected_trait": "intelligence",
       "base_effect": 10,
-      "effect_modifier": 5
+      "effect_modifier": 5,
+      "augment": false,
+      "defensive": false
     },
     {
       "id": "Shield",
@@ -20,7 +24,8 @@
       "affected_trait": "protection",
       "base_effect": 6,
       "effect_modifier": 6,
-      "augment": true
+      "augment": true,
+      "defensive": true
     },
     {
       "id": "Wall",
@@ -28,42 +33,53 @@
       "affected_trait": "protection",
       "base_effect": 20,
       "effect_modifier": 20,
-      "augment": true
+      "augment": true,
+      "defensive": true
     },
     {
       "id": "MagicDart",
       "label": "mighty dart",
       "affected_trait": "health",
       "base_effect": 2,
-      "effect_modifier": 4
+      "effect_modifier": 4,
+      "augment": false,
+      "defensive": false
     },
     {
       "id": "Missile",
       "label": "magic missile",
       "affected_trait": "health",
       "base_effect": 5,
-      "effect_modifier": 4
+      "effect_modifier": 4,
+      "augment": false,
+      "defensive": false
     },
     {
       "id": "Sphere",
       "label": "rolling sphere",
       "affected_trait": "health",
       "base_effect": 3,
-      "effect_modifier": 8
+      "effect_modifier": 8,
+      "augment": false,
+      "defensive": false
     },
     {
       "id": "Hammer",
       "label": "giant hammer",
       "affected_trait": "health",
       "base_effect": 8,
-      "effect_modifier": 5
+      "effect_modifier": 5,
+      "augment": false,
+      "defensive": false
     },
     {
       "id": "Bolt",
       "label": "jagged bolt",
       "affected_trait": "health",
       "base_effect": 10,
-      "effect_modifier": 7
+      "effect_modifier": 7,
+      "augment": false,
+      "defensive": false
     }
   ]
 }

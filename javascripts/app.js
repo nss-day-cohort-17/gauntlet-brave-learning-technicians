@@ -60,6 +60,7 @@ $(document).ready(function() {
         moveAlong = chosenProfession !== null;
         break;
       case "card--weapon":
+        console.log("chosenWeapon",chosenWeapon);
         moveAlong = chosenWeapon !== null;
         break;
     };
@@ -101,7 +102,7 @@ $(document).ready(function() {
               block.push('<div class="card__button">',
                          '<a class="weapon__link btn btn--big btn--blue" href="#">',
                          '<span class="btn__prompt">&gt;</span>',
-                         `<span class="btn__text" weapon='{$weapon}'>${weaponName}</span>`,
+                         `<span class="btn__text" weapon='${weapon}'>${weaponName}</span>`,
                          '</a></div>');
             });
             block.push("</div></div>");
@@ -147,7 +148,6 @@ $(document).ready(function() {
   function startCombat() {
     EnemyCombatant = Gauntlet.Horde.random();
     // EnemyCombatant = Gauntlet.Horde.soldier("Dragon");
-    // console.log("EnemyCombatant",EnemyCombatant);
     EnemyCombatant.equip();
 
     $(".battle--human").html(HumanCombatant.toString());
@@ -193,7 +193,9 @@ $(document).ready(function() {
    */
   $(document).on("click", ".weapon__link", function(e) {
     let weapon = $(this).find(".btn__text").attr("weapon");
-    chosenWeapon = Gauntlet.WeaponRack.weapons()[weapon];
+    chosenWeapon = Gauntlet.WeaponRack
+                             .weapons()
+                             .find(w => w.id === weapon);
   });
 
 

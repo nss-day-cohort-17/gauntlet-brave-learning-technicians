@@ -12,7 +12,7 @@ var Gauntlet = function ($$gauntlet) {
   __.property(_player, "species", null);
   __.property(_player, "profession", null);
   __.property(_player, "weapon", null);
-  __.property(_player, "playerName", null);
+  __.property(_player, "name", null);
   __.property(_player, "protection", 0);
   __.property(_player, "health", 0);
   __.property(_player, "strength", 90);
@@ -23,7 +23,7 @@ var Gauntlet = function ($$gauntlet) {
   __.property(_player, "skinColors", ["gray"]);
 
   __.def(_player, "toString", function() {
-    let output = [this.playerName,
+    let output = [this.name,
       ": a ",
       this.skinColor,
       (this.skinColor) ? " skinned " : "",
@@ -128,7 +128,7 @@ var Gauntlet = function ($$gauntlet) {
 
   __.def(_army.Human, "init", function (name) {
     this.species = "Human";
-    this.playerName = name;
+    this.name = name;
     this.intelligence = this.intelligence + 20;
     this.skinColors.push("brown", "red", "white", "disease");
 

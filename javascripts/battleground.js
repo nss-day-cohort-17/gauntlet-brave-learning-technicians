@@ -8,15 +8,16 @@ Battleground.prototype.melee = function() {
       baseEnemyDamage = 0,
       totalHumanDamage = 0,
       totalEnemyDamage = 0;
-  let spell, result, formattedResult;
+  let spell, result, formattedResult, target;
 
   /*
     Calculate damage done by player
    */
   if (this.human.profession.magical) {
     spell = Gauntlet.Spellbook.spells().random();
+    // target = (spell.defensive) ? this.human : this.enemy;
     modifier = Math.floor(this.human.intelligence / 10);
-    result = spell.read(modifier).cast().at(this.enemy);
+    result = spell.read(modifier).cast().at((spell.defensive) ? this.human : this.enemy);
   } else {
     modifier = Math.floor(this.human.strength / 10);
     result = this.human.weapon.swing(modifier).at(this.enemy);

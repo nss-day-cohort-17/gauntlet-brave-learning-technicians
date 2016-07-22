@@ -24,12 +24,9 @@ var Gauntlet = function ($$gauntlet) {
       this.target = target;
       // TODO: Add critical chance
       target[this.affected_trait] += (this.effect * ((this.augment) ? 1 : -1)) + (this.intelligenceModifier || 0);
-      return `${ this.label } of ${ this.elements.random() } modified ${this.target.name}'s ${this.affected_trait} by ${this.effect}`;
+      return `${this.label} of ${this.elements.random()} modified
+              ${this.target.name}'s ${this.affected_trait} by ${this.effect}`;
     }
-  };
-
-  const Debuffer = {
-    debuff: true
   };
 
   // Spellbook will hold all defined weapons

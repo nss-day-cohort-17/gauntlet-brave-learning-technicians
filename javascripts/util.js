@@ -1,5 +1,29 @@
 "use strict";
 
+const help = (topic) => {
+  if (!topic) {
+    console.log("help('weapons' || 'w') -- Show all available weapons.");
+    console.log("help('monsters' || 'm') -- Show all available monsters.");
+    console.log("help('spells' || 's') -- Show all available spells.");
+  } else {
+    switch(topic)
+    {
+      case "weapons":
+      case "w":
+        Gauntlet.WeaponRack.weapons().each(w => console.log(w))
+        break;
+      case "spells":
+      case "s":
+        Gauntlet.Spellbook.spells().each(w => console.log(w))
+        break;
+      case "monsters":
+      case "m":
+        console.log(Gauntlet.Horde.all());
+        break;
+    }
+  }
+};
+
 // Create object to which utility functions are added for use in the project
 const __ = (__ => {
   __.compose = function (target, ...args) {

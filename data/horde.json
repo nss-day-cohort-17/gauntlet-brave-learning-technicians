@@ -2,7 +2,7 @@
   "classes": [
     {
       "id": "Monster",
-      "playerName": "Grax",
+      "name": "",
       "healthModifier": 30,
       "strengthModifier": 30,
       "intelligenceModifier": -50,

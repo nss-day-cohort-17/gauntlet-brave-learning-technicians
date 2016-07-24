@@ -7,6 +7,9 @@ var Gauntlet = function ($$gauntlet) {
     let names = new Set();
 
     return {
+      all () {
+        return horde;
+      },
       soldier (type) {
         let soldier = Object.create(horde.get(type));
         return soldier;

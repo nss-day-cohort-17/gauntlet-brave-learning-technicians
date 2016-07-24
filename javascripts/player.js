@@ -100,7 +100,6 @@ var Gauntlet = function ($$gauntlet) {
   });
 
   __.def(_player, "setWeapon", function(newWeapon) {
-
     try {
       if (this.profession && !this.profession.magical && !newWeapon) {
         this.weapon = $$gauntlet.WeaponRack.weapons().random();

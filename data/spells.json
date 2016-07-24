@@ -22,7 +22,7 @@
       "id": "Shield",
       "label": "shield",
       "affected_trait": "protection",
-      "base_effect": 6,
+      "base_effect": 4,
       "effect_modifier": 6,
       "augment": true,
       "defensive": true
@@ -31,8 +31,8 @@
       "id": "Wall",
       "label": "wall",
       "affected_trait": "protection",
-      "base_effect": 20,
-      "effect_modifier": 20,
+      "base_effect": 10,
+      "effect_modifier": 5,
       "augment": true,
       "defensive": true
     },

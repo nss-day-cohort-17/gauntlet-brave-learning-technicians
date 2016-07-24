@@ -23,9 +23,17 @@ var Gauntlet = function ($$gauntlet) {
     at (target) {
       this.target = target;
       // TODO: Add critical chance
-      target[this.affected_trait] += (this.effect * ((this.augment) ? 1 : -1)) + (this.intelligenceModifier || 0);
-      return `${this.label} of ${this.elements.random()} modified
-              ${this.target.name}'s ${this.affected_trait} by ${this.effect}`;
+      let totalEffect = Math.round(this.effect + (this.intelligenceModifier || 0));
+      totalEffect *= (this.augment) ? 1 : -1;
+      target[this.affected_trait] += totalEffect;
+
+      return {
+        spell: this.label,
+        element: this.elements.random(),
+        target: this.target.name,
+        effect: this.affected_trait,
+        damage: totalEffect
+      };
     }
   };
 
@@ -47,7 +55,7 @@ var Gauntlet = function ($$gauntlet) {
 
             // Iterate all weapon objects in the JSON file
             response.spells.each(currentSpell =>
-                spellList.push(Object.assign(Object.create(MasterSpell), currentSpell))
+                spellList.push(__.compose(Object.create(MasterSpell), currentSpell))
             );
 
             // Resolve the weapon loading promise with the weapon list

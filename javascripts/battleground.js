@@ -1,94 +1,91 @@
-let Battleground = function (humanCombatant, enemyCombatant) {
+"use strict";
+
+let Battleground = function (humanCombatant, enemyCombatant, consoleOutput = false) {
   this.human = humanCombatant;
   this.enemy = enemyCombatant;
+  this.consoleOutput = consoleOutput;
 };
 
 Battleground.prototype.melee = function() {
-  let baseHumanDamage = 0,
-      baseEnemyDamage = 0,
-      totalHumanDamage = 0,
-      totalEnemyDamage = 0;
-  let spell, result, formattedResult, target;
+  let formattedResult = "";
+
+  // Perform attack and return the string outcome
+  let attack = (combatant, target) => {
+    let result, spell, modifier;
+
+    if (combatant.profession.magical) {
+      spell = Gauntlet.Spellbook.spells().random();
+      modifier = Math.floor(combatant.intelligence / 5);
+      result = spell.read(modifier).cast().at((spell.defensive) ? combatant : target);
+      result = `
+        ${combatant.name} cast ${result.spell} of ${result.element}
+        on ${(spell.defensive) ? combatant.name : target.name} for ${result.damage} ${result.effect}
+      `;
+    } else {
+      modifier = Math.floor(combatant.strength / 5);
+      result = combatant.weapon.swing(modifier).at(target);
+      result = `
+        ${combatant.name} attacked ${target.name} for ${result.damage}
+      `;
+    }
+
+    return result;
+  }
 
   /*
-    Calculate damage done by player
+    Perform player action
    */
-  if (this.human.profession.magical) {
-    spell = Gauntlet.Spellbook.spells().random();
-    // target = (spell.defensive) ? this.human : this.enemy;
-    modifier = Math.floor(this.human.intelligence / 10);
-    result = spell.read(modifier).cast().at((spell.defensive) ? this.human : this.enemy);
+  let playerOutcome = attack(this.human, this.enemy);
+
+  if (this.consoleOutput) {
+
+    console.clear();
+    console.log(`${this.human.name} the ${this.human.profession.label} (${this.human.strength} str) (${this.human.intelligence} int) (${this.human.protection} armor) wielding a ${(this.human.weapon) ? this.human.weapon : "Spellbook"}`);
+    console.info(`${this.human.health} hp`);
+    console.log(`${this.enemy.name} the ${this.enemy.id} ${this.enemy.profession.label} (${this.enemy.strength}) (${this.enemy.intelligence}) wielding a ${(this.enemy.weapon) ? this.enemy.weapon : "Spellbook"}`);
+    console.info(`${this.enemy.health} hp`);
+    console.log(`${playerOutcome}`);
+
+    if (this.enemy.health <= 0) {
+      console.log(`${this.human.name} won!!`);
+      return false;
+    }
+
   } else {
-    modifier = Math.floor(this.human.strength / 10);
-    result = this.human.weapon.swing(modifier).at(this.enemy);
+
+    $("#battle-record").append(`<div class="battle-record__human">${playerOutcome}</div>`);
+    if (this.enemy.health <= 0) {
+      $("#battle-record").append("<div class=\"battle-over\">The battle is over. You won!</div>");
+      if (this.consoleOutput) console.log(`${this.human.name} won!!`);
+      return false;
+    }
+
   }
 
-  /*
-    Start building output string for human action
-   */
-  formattedResult = `<div class="battle-record__human">${result}</div>`;
-  $("#battle-record").append(formattedResult);
 
   /*
-    If the human did enough damage to kill the enemy, stop the battle
+    Perform enemy action
    */
-  if (this.enemy.health <= 0) {
-    $("#battle-record").append("<div class=\"battle-over\">The battle is over. You won!</div>");
+  let enemyOutcome = attack(this.enemy, this.human);
+  if (this.consoleOutput) {
 
-    return false;
+    console.log(`${enemyOutcome}`);
+    if (this.human.health <= 0) {
+      console.log(`${this.enemy.name} won!!`);
+      return false;
+    }
+
+  } else {
+
+    $("#battle-record").append(`<div class="battle-record__enemy">${enemyOutcome}</div>`);
+    if (this.human.health <= 0) {
+      $("#battle-record").append("<div class=\"battle-over\">The battle is over. The " + this.enemy.name + " won!</div>");
+      if (this.consoleOutput) console.log(`${this.enemy.name} won!!`);
+      return false;
+    }
+
   }
 
-  /*
-    Calculate damage done by enemy
-   */
-  // if (!this.enemy.profession.magical) {
-  //   enemyWeapon = this.enemy.weapon;
-  //   modifier = Math.floor(this.enemy.strength / 10);
-  // } else {
-  //   enemyWeapon = new window[AvailableSpells[Math.round(Math.random() * (AvailableSpells.length - 1))]]();
-  //   enemyWeapon.cast();
-  //   modifier = Math.floor(this.enemy.intelligence / 10);
-
-  //   if (enemyWeapon.defensive) {
-  //     this.enemy.protection = enemyWeapon.protection;
-  //   }
-  // }
-
-  /*
-    Apply damage unless a defensive spell was cast
-   */
-  // if (!enemyWeapon.defensive) {
-  //   baseEnemyDamage = Math.round(Math.random() * enemyWeapon.base_damage + 1);
-  //   totalEnemyDamage = baseEnemyDamage + modifier - this.human.protection;
-  //   totalEnemyDamage = (totalEnemyDamage < 0) ? 0 : totalEnemyDamage;
-  //   if (enemyCritical > 95) {
-  //     totalEnemyDamage = Math.floor(totalEnemyDamage * 1.5);
-  //   }
-  // }
-
-  // this.human.health -= totalEnemyDamage;
-
-  /*
-    Start building output string for enemy action
-   */
-  // battleResult = "<div class=\"battle-record__enemy\">";
-  // if (enemyWeapon.defensive) {
-  //   battleResult += "&gt; " + this.enemy.species + " <span class=\"battle-health\">(" + this.enemy.health + " hp)</span> casts a " + enemyWeapon.toString() + " for " + this.enemy.protection + " protection.";
-  // } else {
-  //   battleResult += "&gt; " + this.enemy.species + " <span class=\"battle-health\">(" + this.enemy.health + " hp)</span> attacks with " + enemyWeapon.toString() + " for " + totalEnemyDamage + " damage.";
-  //   battleResult += (enemyCritical > 95) ? " Critical hit!!" : "";
-  // }
-  // battleResult += "</div>";
-  // $("#battle-record").append(battleResult);
-
-  /*
-    If the enemy did enough damage to kill the human, stop the battle
-   */
-  if (this.human.health <= 0) {
-    $("#battle-record").append("<div class=\"battle-over\">The battle is over. The " + this.enemy.species + " won!</div>");
-
-    return false;
-  }
 
   return true;
 };

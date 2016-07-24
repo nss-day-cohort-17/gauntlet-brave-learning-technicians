@@ -3,11 +3,11 @@
 var Gauntlet = function ($$gauntlet) {
 
   $$gauntlet.GuildHall = function () {
-    let _professions = new Map();
+    let allProfessions = new Map();
 
     return {
       classes () {
-        return _professions;
+        return allProfessions;
       },
       load (callBack) {
         return new Promise((resolve, reject) => {
@@ -17,23 +17,26 @@ var Gauntlet = function ($$gauntlet) {
             response.classes.each(currentClass => {
 
               // Define the prototype for the new profession
-              let prototypeForObject = (currentClass.prototype === null) ? {} : _professions.get(currentClass.prototype);
+              let prototypeForObject = currentClass.prototype === null
+                                          ? {}
+                                          : allProfessions.get(currentClass.prototype);
 
               // Create the new profession
-              let profession = Object.assign(Object.create(prototypeForObject), currentClass);
+              let profession = __.compose(Object.create(prototypeForObject), currentClass);
 
               // Add a toString() method to each class which displays the label
-              __.property(profession, "toString", () => currentClass.label);
+              __.def(profession, "toString", () => currentClass.label);
 
               // Add new profession to the Map
-              _professions.set(currentClass.id, profession);
+              allProfessions.set(currentClass.id, profession);
             });
 
             // Resolve the promise
-            resolve(_professions);
+            resolve();
 
           }).fail((xhr, error, msg) => {
             console.error(msg);
+            reject();
           });
         });
       }

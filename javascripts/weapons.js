@@ -11,17 +11,27 @@ var Gauntlet = function ($$gauntlet) {
     ranged: false,
     poisoned: false,
     swing (modifier) {
-      this.strength_modifier = modifier / 10;
+      this.strength_modifier = modifier;
       return this;
     },
     at (target) {
+      // Calculate base weapon damage
       let damage = Math.round(Math.random() * this.base_damage + 1);
-      console.log("damage", damage, this.strength_modifier, target.protection);
+
+      // Add strength modifier and reduce by target's armor
       damage += Math.round(this.strength_modifier - target.protection);
+
+      // Minimum damage is 0
       damage = (damage < 0) ? 0 : damage;
+
+      // Reduce target's health
       target.health -= damage;
 
-      return `${ this.label } hit ${target.name} for ${ damage } damage.`;
+      return {
+        weapon: this.label,
+        target: target.name,
+        damage: damage
+      };
     },
     toString () { return `${this.label}`; }
   };
@@ -43,8 +53,7 @@ var Gauntlet = function ($$gauntlet) {
           $.ajax({url: "./data/weapons.json"}).done(response => {
 
             // Iterate all weapon objects in the JSON file
-            response.weapons.each(weapon =>
-                weaponList.push(Object.assign(Object.create(Weapon), weapon)));
+            response.weapons.each(weapon => weaponList.push(__.compose(Object.create(Weapon), weapon)));
 
             // Resolve the weapon loading promise with the weapon list
             resolve(weaponList);

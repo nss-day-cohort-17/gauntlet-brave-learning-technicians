@@ -13,8 +13,6 @@ Gauntlet.WeaponRack.load()
   /*
     Test code to generate a human player and a random enemy
    */
-
-
   console.group("Sample Combatants");
   console.log("Creating a new Human instance");
   let warrior = Gauntlet.Army.Human.init("Joe").equip();
@@ -22,13 +20,28 @@ Gauntlet.WeaponRack.load()
   console.log(" ");
   console.log("Creating a new Enemy instance");
   let enemy = Gauntlet.Horde.random();
-  // let enemy = Gauntlet.Horde.soldier("Dragon");
   enemy.equip();
   console.log(enemy.toString());
   console.groupEnd("Sample Combatants");
 
-});
+  /*
+    To have a sample battle run in the console, without needing
+    to select anything in the DOM application, just add console=true
+    to the URL.
 
+    Example:
+      http://localhost:8080/?console=true
+
+   */
+  if (__.getURLParameter("console") === "true") {
+    let battleground = new Battleground(warrior, enemy, true);
+    let battleTimer = window.setInterval(() => {
+      if (!battleground.melee()) {
+        window.clearInterval(battleTimer);
+      }
+    }, 2000);
+  }
+});
 
 $(document).ready(function() {
 
@@ -102,7 +115,7 @@ $(document).ready(function() {
               block.push('<div class="card__button">',
                          '<a class="weapon__link btn btn--big btn--blue" href="#">',
                          '<span class="btn__prompt">&gt;</span>',
-                         `<span class="btn__text" weapon='${weapon}'>${weaponName}</span>`,
+                         `<span class="btn__text weapon__name" weapon='${weapon}'>${weaponName}</span>`,
                          '</a></div>');
             });
             block.push("</div></div>");
@@ -208,10 +221,5 @@ $(document).ready(function() {
     $("." + previousCard).show();
   });
 
-  /*
-    Whichever combatant has the higher intelligence score
-    will attack first. Intelligence also increases damange
-    to magical attacks.
-   */
 
 });

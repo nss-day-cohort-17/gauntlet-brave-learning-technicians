@@ -15,14 +15,14 @@ Battleground.prototype.melee = function() {
 
     if (combatant.profession.magical) {
       spell = Gauntlet.Spellbook.spells().random();
-      modifier = Math.floor(combatant.intelligence / 5);
+      modifier = Math.floor(combatant.intelligence / 15);
       result = spell.read(modifier).cast().at((spell.defensive) ? combatant : target);
       result = `
         ${combatant.name} cast ${result.spell} of ${result.element}
         on ${(spell.defensive) ? combatant.name : target.name} for ${result.damage} ${result.effect}
       `;
     } else {
-      modifier = Math.floor(combatant.strength / 5);
+      modifier = Math.floor(combatant.strength / 3);
       result = combatant.weapon.swing(modifier).at(target);
       result = `
         ${combatant.name} attacked ${target.name} for ${result.damage}
@@ -42,7 +42,7 @@ Battleground.prototype.melee = function() {
     console.clear();
     console.log(`${this.human.name} the ${this.human.profession.label} (${this.human.strength} str) (${this.human.intelligence} int) (${this.human.protection} armor) wielding a ${(this.human.weapon) ? this.human.weapon : "Spellbook"}`);
     console.info(`${this.human.health} hp`);
-    console.log(`${this.enemy.name} the ${this.enemy.id} ${this.enemy.profession.label} (${this.enemy.strength}) (${this.enemy.intelligence}) wielding a ${(this.enemy.weapon) ? this.enemy.weapon : "Spellbook"}`);
+    console.log(`${this.enemy.name} the ${this.enemy.id} ${this.enemy.profession.label} (${this.enemy.strength} str) (${this.enemy.intelligence} int) (${this.enemy.protection} armor) wielding a ${(this.enemy.weapon) ? this.enemy.weapon : "Spellbook"}`);
     console.info(`${this.enemy.health} hp`);
     console.log(`${playerOutcome}`);
 

@@ -25,7 +25,11 @@ var Gauntlet = function ($$gauntlet) {
       // TODO: Add critical chance
       let totalEffect = Math.round(this.effect + (this.intelligenceModifier || 0));
       totalEffect *= (this.augment) ? 1 : -1;
-      target[this.affected_trait] += totalEffect;
+      if (this.affected_trait === "protection") {
+        target[this.affected_trait] = totalEffect;
+      } else {
+        target[this.affected_trait] += totalEffect;
+      }
 
       return {
         spell: this.label,

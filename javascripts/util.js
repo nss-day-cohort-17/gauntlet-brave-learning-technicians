@@ -10,7 +10,11 @@ const help = (topic) => {
     {
       case "weapons":
       case "w":
-        Gauntlet.WeaponRack.weapons().each(w => console.log(w))
+        console.log(`
+Weapon              Base Dmg     Poison    Ranged
+====================================================
+`);
+        Gauntlet.WeaponRack.weapons().each(w => console.log(`${(w.label + " ".repeat(20)).slice(0, 20)}${(w.base_damage + " ".repeat(13)).slice(0,13)}${(w.poisoned + " ".repeat(6)).slice(0,10)}${w.ranged} `))
         break;
       case "spells":
       case "s":
@@ -18,7 +22,7 @@ const help = (topic) => {
         break;
       case "monsters":
       case "m":
-        console.log(Gauntlet.Horde.all());
+        Gauntlet.Horde.all().each(w => console.log(w))
         break;
     }
   }
@@ -64,6 +68,14 @@ const __ = (__ => {
 (() => {
   if (!("each" in Array.prototype)) {
     Array.prototype.each = new Proxy(Array.prototype.forEach, {
+      apply: function (_target, _this, _args) {
+        return _target.apply(_this, _args);
+      }
+    });
+  }
+
+  if (!("each" in Map.prototype)) {
+    Map.prototype.each = new Proxy(Map.prototype.forEach, {
       apply: function (_target, _this, _args) {
         return _target.apply(_this, _args);
       }

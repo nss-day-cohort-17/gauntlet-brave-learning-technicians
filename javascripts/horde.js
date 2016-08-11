@@ -39,7 +39,7 @@ var Gauntlet = function ($$gauntlet) {
               };
 
               // Create a new object for the current monster based on corresponding prototype
-              let monsterForMap = __.compose(Object.create(objectPrototype), monster, {
+              let monsterForMap = __.compose(objectPrototype, monster, {
                 species: monster["id"]
               });
 

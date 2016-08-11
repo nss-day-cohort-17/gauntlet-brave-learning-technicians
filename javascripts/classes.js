@@ -22,7 +22,7 @@ var Gauntlet = function ($$gauntlet) {
                                           : allProfessions.get(currentClass.prototype);
 
               // Create the new profession
-              let profession = __.compose(Object.create(prototypeForObject), currentClass);
+              let profession = __.compose(prototypeForObject, currentClass);
 
               // Add a toString() method to each class which displays the label
               __.def(profession, "toString", () => currentClass.label);

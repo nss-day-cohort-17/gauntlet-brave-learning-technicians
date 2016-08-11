@@ -18,7 +18,11 @@ Weapon              Base Dmg     Poison    Ranged
         break;
       case "spells":
       case "s":
-        Gauntlet.Spellbook.spells().each(w => console.log(w))
+        console.log(`
+Spell              Range        Effect         Defensive
+=========================================================
+`);
+        Gauntlet.Spellbook.spells().each(w => console.log(`${(w.id + " ".repeat(20)).slice(0, 19)}${((w.base_effect + " - " + (w.base_effect + w.effect_modifier)) + " ".repeat(13)).slice(0,13)}${(w.affected_trait + " ".repeat(15)).slice(0,15)}${w.defensive} `))
         break;
       case "monsters":
       case "m":
@@ -30,7 +34,8 @@ Weapon              Base Dmg     Poison    Ranged
 
 // Create object to which utility functions are added for use in the project
 const __ = (__ => {
-  __.compose = function (target, ...args) {
+  __.compose = function (proto, ...args) {
+    let target = Object.create(proto)
     args.each(arg => target = Object.assign(target, arg));
     return target;
   };

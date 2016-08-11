@@ -53,7 +53,10 @@ var Gauntlet = function ($$gauntlet) {
           $.ajax({url: "./data/weapons.json"}).done(response => {
 
             // Iterate all weapon objects in the JSON file
-            response.weapons.each(weapon => weaponList.push(__.compose(Object.create(Weapon), weapon)));
+            response.weapons.each(weapon =>
+              weaponList.push(
+                __.compose(Weapon, weapon))
+              );
 
             // Resolve the weapon loading promise with the weapon list
             resolve(weaponList);

@@ -1,6 +1,15 @@
 {
   "spells": [
     {
+      "id": "MysticSalve",
+      "label": "mystic salve",
+      "affected_trait": "health",
+      "base_effect": 1,
+      "effect_modifier": 2,
+      "augment": false,
+      "defensive": true
+    },
+    {
       "id": "Weakness",
       "label": "weakness",
       "affected_trait": "strength",

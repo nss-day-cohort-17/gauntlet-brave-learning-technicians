@@ -59,7 +59,7 @@ var Gauntlet = function ($$gauntlet) {
 
             // Iterate all weapon objects in the JSON file
             response.spells.each(currentSpell =>
-                spellList.push(__.compose(Object.create(MasterSpell), currentSpell))
+                spellList.push(__.compose(MasterSpell, currentSpell))
             );
 
             // Resolve the weapon loading promise with the weapon list

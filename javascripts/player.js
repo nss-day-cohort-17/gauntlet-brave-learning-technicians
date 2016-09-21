@@ -92,9 +92,13 @@ var Gauntlet = function ($$gauntlet) {
       this.profession = profession;
     }
 
-    this.modifyHealth(this.profession.healthModifier)
-        .modifyStrength(this.profession.strengthModifier)
-        .modifyIntelligence(this.profession.intelligenceModifier);
+    try {
+      this.modifyHealth(this.profession.healthModifier)
+          .modifyStrength(this.profession.strengthModifier)
+          .modifyIntelligence(this.profession.intelligenceModifier);
+    } catch (ex) {
+      console.error(ex, profession);
+    }
 
     return this;
   });

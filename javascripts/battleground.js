@@ -67,11 +67,11 @@ Battleground.prototype.melee = function() {
     Perform enemy action
    */
   let enemyOutcome = attack(this.enemy, this.human);
-
   if (this.consoleOutput) {
+
     console.log(`${enemyOutcome}`);
     if (this.human.health <= 0) {
-      console.log(`${this.enemy} won!!`);
+      console.log(`${this.enemy.name} won!!`);
       return false;
     }
 

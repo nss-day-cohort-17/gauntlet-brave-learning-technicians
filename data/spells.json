@@ -91,11 +91,11 @@
       "defensive": false
     },
     {
-      "id": "MindFuck",
-      "label": "mind fuck",
+      "id": "Maelstrom",
+      "label": "maelstrom",
       "affected_trait": "health",
-      "base_effect": 9,
-      "effect_modifier": 9,
+      "base_effect": 20,
+      "effect_modifier": 10,
       "augment": false,
       "defensive": false
     },
@@ -103,8 +103,8 @@
       "id": "Storm",
       "label": "violent storm",
       "affected_trait": "health",
-      "base_effect": 20,
-      "effect_modifier": 10,
+      "base_effect": 12,
+      "effect_modifier": 9,
       "augment": false,
       "defensive": false
     },

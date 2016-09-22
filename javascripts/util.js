@@ -6,29 +6,34 @@ const help = (topic) => {
     console.log("help('monsters' || 'm') -- Show all available monsters.");
     console.log("help('spells' || 's') -- Show all available spells.");
   } else {
-    switch(topic)
-    {
+
+    let output = "";
+
+    switch(topic) {
       case "weapons":
       case "w":
-        console.log(`
-Weapon              Base Dmg     Poison    Ranged
-====================================================
-`);
-        Gauntlet.WeaponRack.weapons().each(w => console.log(`${(w.label + " ".repeat(20)).slice(0, 20)}${(w.base_damage + " ".repeat(13)).slice(0,13)}${(w.poisoned + " ".repeat(6)).slice(0,10)}${w.ranged} `))
+        console.clear();
+        output += `Weapon              Base Dmg     Poison    Ranged\n====================================================\n`;
+        Gauntlet.WeaponRack.weapons().each(w => output += `${(w.label + " ".repeat(20)).slice(0, 20)}${(w.base_damage + " ".repeat(13)).slice(0,13)}${(w.poisoned + " ".repeat(6)).slice(0,10)}${w.ranged}\n`);
         break;
+
+
       case "spells":
       case "s":
-        console.log(`
-Spell              Range        Effect         Defensive
-=========================================================
-`);
-        Gauntlet.Spellbook.spells().each(w => console.log(`${(w.id + " ".repeat(20)).slice(0, 19)}${((w.base_effect + " - " + (w.base_effect + w.effect_modifier)) + " ".repeat(13)).slice(0,13)}${(w.affected_trait + " ".repeat(15)).slice(0,15)}${w.defensive} `))
+        console.clear();
+        output += `Spell              Range        Effect         Defensive\n=========================================================\n`;
+        Gauntlet.Spellbook.spells().each(w => output += `${(w.id + " ".repeat(20)).slice(0, 19)}${((w.base_effect + " - " + (w.base_effect + w.effect_modifier)) + " ".repeat(13)).slice(0,13)}${(w.affected_trait + " ".repeat(15)).slice(0,15)}${w.defensive}\n`);
         break;
+
+
       case "monsters":
       case "m":
-        Gauntlet.Horde.all().each(w => console.log(w))
+        console.clear();
+        output += `Species        Mods: Health   Strength   Intelligence\n=====================================================\n`;
+        Gauntlet.Horde.all().each(w => output += `${(w.species + " ".repeat(22)).slice(0, 21)}${(w.healthModifier + " ".repeat(10)).slice(0, 9)}${(w.strengthModifier + " ".repeat(12)).slice(0, 11)}${(w.intelligenceModifier + " ".repeat(12)).slice(0, 11)}\n`)
         break;
     }
+    console.log(output);
   }
 };
 
@@ -90,6 +95,12 @@ const __ = (__ => {
   if (!("random" in Array.prototype)) {
     Array.prototype.random = function () {
       return this[Math.floor(Math.random() * this.length)];
+    };
+  }
+
+  if (!("random" in Map.prototype)) {
+    Map.prototype.random = function () {
+      return [...this.values()].random();
     };
   }
 

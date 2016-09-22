@@ -23,11 +23,11 @@ var Gauntlet = function ($$gauntlet) {
           for an actual soldier instance.
          */
         do {
-           randomSoldier = [...horde].random()[1];
+          randomSoldier = horde.random();
         } while (randomSoldier.id === "Monster");
 
         // Give the soldier a random name
-         randomSoldier.name = names.random();
+        randomSoldier.name = names.random();
 
         return randomSoldier;
       },

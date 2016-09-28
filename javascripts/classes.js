@@ -3,32 +3,32 @@
 var Gauntlet = function ($$gauntlet) {
 
   $$gauntlet.GuildHall = function () {
-    let allProfessions = new Map();
+    let all_professions = new Map();
 
     return {
       classes () {
-        return allProfessions;
+        return all_professions;
       },
       load (callBack) {
         return new Promise((resolve, reject) => {
           $.ajax({url: "./data/classes.json"}).done(response => {
 
             // Iterate over all the class objects in the JSON file
-            response.classes.each(currentClass => {
+            response.classes.each(current_class => {
 
               // Define the prototype for the new profession
-              let prototypeForObject = currentClass.prototype === null
+              let prototype_for_object = current_class.prototype === null
                                           ? {}
-                                          : allProfessions.get(currentClass.prototype);
+                                          : all_professions.get(current_class.prototype);
 
               // Create the new profession
-              let profession = __.compose(prototypeForObject, currentClass);
+              let profession = __.compose(prototype_for_object, current_class);
 
               // Add a toString() method to each class which displays the label
-              __.def(profession, "toString", () => currentClass.label);
+              __.def(profession, "toString", () => current_class.label);
 
               // Add new profession to the Map
-              allProfessions.set(currentClass.id, profession);
+              all_professions.set(current_class.id, profession);
             });
 
             // Resolve the promise

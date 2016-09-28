@@ -39,7 +39,7 @@ const help = (topic) => {
 
 // Create object to which utility functions are added for use in the project
 const __ = (__ => {
-  __.compose = function (proto, ...args) {
+  __.compose = (proto, ...args) => {
     let target = Object.create(proto)
     args.each(arg => target = Object.assign(target, arg));
     return target;

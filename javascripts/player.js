@@ -1,28 +1,28 @@
 "use strict";
 
 var Gauntlet = function ($$gauntlet) {
-  let _army = {};
+  let army = {};
 
   /*
     Define the base object for any player of Gauntlet,
     whether a human player or a monster.
    */
-  let _player = _army.Player = Object.create(null);
+  let player = army.Player = Object.create(null);
 
-  __.property(_player, "species", null);
-  __.property(_player, "profession", null);
-  __.property(_player, "weapon", null);
-  __.property(_player, "name", null);
-  __.property(_player, "protection", 0);
-  __.property(_player, "health", 0);
-  __.property(_player, "strength", 90);
-  __.property(_player, "intelligence", 90);
-  __.property(_player, "effects", []);
-  __.property(_player, "limbs", ["head", "neck", "arm", "leg", "torso"]);
-  __.property(_player, "skinColor", "");
-  __.property(_player, "skinColors", ["gray"]);
+  __.property(player, "species", null);
+  __.property(player, "profession", null);
+  __.property(player, "weapon", null);
+  __.property(player, "name", null);
+  __.property(player, "protection", 0);
+  __.property(player, "health", 0);
+  __.property(player, "strength", 90);
+  __.property(player, "intelligence", 90);
+  __.property(player, "effects", []);
+  __.property(player, "limbs", ["head", "neck", "arm", "leg", "torso"]);
+  __.property(player, "skinColor", "");
+  __.property(player, "skinColors", ["gray"]);
 
-  __.def(_player, "toString", function() {
+  __.def(player, "toString", function() {
     let output = [this.name,
       ": a ",
       this.skinColor,
@@ -39,7 +39,7 @@ var Gauntlet = function ($$gauntlet) {
   });
 
 
-  __.def(_player, "equip", function (profession, weapon) {
+  __.def(player, "equip", function (profession, weapon) {
     this.health = Math.floor(Math.random() * 200 + 150);
 
     // Compose a profession
@@ -66,25 +66,25 @@ var Gauntlet = function ($$gauntlet) {
     return this;
   });
 
-  __.def(_player, "modifyHealth", function(bonus) {
+  __.def(player, "modifyHealth", function(bonus) {
     this.health += bonus;
     if (this.health < 20) this.health = 20;
     return this;
   });
 
-  __.def(_player, "modifyStrength", function(bonus) {
+  __.def(player, "modifyStrength", function(bonus) {
     this.strength += bonus;
     if (this.strength < 10) this.strength = 10;
     return this;
   });
 
-  __.def(_player, "modifyIntelligence", function(bonus) {
+  __.def(player, "modifyIntelligence", function(bonus) {
     this.intelligence += bonus;
     if (this.intelligence < 10) this.intelligence = 10;
     return this;
   });
 
-  __.def(_player, "setProfession", function(profession) {
+  __.def(player, "setProfession", function(profession) {
 
     if (!profession) {
       this.profession = $$gauntlet.GuildHall.classes().get(this.allowedClasses.random());
@@ -103,7 +103,7 @@ var Gauntlet = function ($$gauntlet) {
     return this;
   });
 
-  __.def(_player, "setWeapon", function(newWeapon) {
+  __.def(player, "setWeapon", function(newWeapon) {
     try {
       if (this.profession && !this.profession.magical && !newWeapon) {
         this.weapon = $$gauntlet.WeaponRack.weapons().random();
@@ -117,7 +117,7 @@ var Gauntlet = function ($$gauntlet) {
     return this;
   });
 
-  __.def(_player, "setSkin", function() {
+  __.def(player, "setSkin", function() {
     this.skinColor = this.skinColors.random();
     return this;
   });
@@ -127,9 +127,9 @@ var Gauntlet = function ($$gauntlet) {
     Define the base properties for a human in a
     constructor function.
    */
-  _army.Human = Object.create(_player);
+  army.Human = Object.create(player);
 
-  __.def(_army.Human, "init", function (name) {
+  __.def(army.Human, "init", function (name) {
     this.species = "Human";
     this.name = name;
     this.intelligence = this.intelligence + 20;
@@ -143,7 +143,7 @@ var Gauntlet = function ($$gauntlet) {
   });
 
   // Attach the army to the global gauntlet object
-  $$gauntlet.Army = _army;
+  $$gauntlet.Army = army;
 
   return $$gauntlet;
 

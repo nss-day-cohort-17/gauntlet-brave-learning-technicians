@@ -13,7 +13,7 @@ var Gauntlet = function ($$gauntlet) {
       return `${ this.label } of ${ this.elements.random() }`;
     },
     read (modifier) {
-      this.intelligenceModifier = modifier;
+      this.intelligence_modifier = modifier;
       return this;
     },
     cast () {
@@ -23,12 +23,12 @@ var Gauntlet = function ($$gauntlet) {
     at (target) {
       this.target = target;
       // TODO: Add critical chance
-      let totalEffect = Math.round(this.effect + (this.intelligenceModifier || 0));
-      totalEffect *= (this.augment) ? 1 : -1;
+      let total_effect = Math.round(this.effect + (this.intelligence_modifier || 0));
+      total_effect *= (this.augment) ? 1 : -1;
       if (this.affected_trait === "protection") {
-        target[this.affected_trait] = totalEffect;
+        target[this.affected_trait] = total_effect;
       } else {
-        target[this.affected_trait] += totalEffect;
+        target[this.affected_trait] += total_effect;
       }
 
       return {
@@ -36,20 +36,20 @@ var Gauntlet = function ($$gauntlet) {
         element: this.elements.random(),
         target: this.target.name,
         effect: this.affected_trait,
-        damage: totalEffect
+        damage: total_effect
       };
     }
   };
 
   // Spellbook will hold all defined weapons
   $$gauntlet.Spellbook = function () {
-    let spellList = [];
+    let spell_list = [];
 
     return {
 
       // Method to return the entire collection of spells
       spells () {
-        return spellList;
+        return spell_list;
       },
 
       // Method to load the spells from the JSON file
@@ -59,11 +59,11 @@ var Gauntlet = function ($$gauntlet) {
 
             // Iterate all weapon objects in the JSON file
             response.spells.each(currentSpell =>
-              spellList.push(__.compose(MasterSpell, currentSpell))
+              spell_list.push(__.compose(MasterSpell, currentSpell))
             );
 
             // Resolve the weapon loading promise with the weapon list
-            resolve(spellList);
+            resolve(spell_list);
 
           }).fail((xhr, error, msg) => {
             reject(msg);

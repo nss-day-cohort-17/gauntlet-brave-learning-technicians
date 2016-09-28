@@ -49,25 +49,25 @@ var Gauntlet = function ($$gauntlet) {
               this point.
              */
             response.classes.each(monster => {
-              let objectPrototype;
+              let object_prototype;
 
               // The base monster will always have Player as its prototype
               if (monster.prototype === null) {
-                objectPrototype = $$gauntlet.Army.Player;
+                object_prototype = $$gauntlet.Army.Player;
               } else  {
-                objectPrototype = horde.get(monster.prototype);
+                object_prototype = horde.get(monster.prototype);
               };
 
               /*
                 Create a new object for the current monster based on the
                 corresponding prototype
                */
-              let monsterForMap = __.compose(objectPrototype, monster, {
+              let monster_for_map = __.compose(object_prototype, monster, {
                 species: monster["id"]
               });
 
               // Add creature to the horde Map
-              horde.set(monster.id, monsterForMap);
+              horde.set(monster.id, monster_for_map);
             });
 
             // Resolve the promise

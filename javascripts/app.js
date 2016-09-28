@@ -5,9 +5,9 @@
   needed to establish all the prototype chains needed.
  */
 Gauntlet.WeaponRack.load()
-  .then(() => Gauntlet.Spellbook.load())
-  .then(() => Gauntlet.Horde.load())
-  .then(() => Gauntlet.GuildHall.load())
+  .then(Gauntlet.Spellbook.load)
+  .then(Gauntlet.Horde.load)
+  .then(Gauntlet.GuildHall.load)
   .then(() => {
 
   /*
@@ -218,7 +218,7 @@ $(document).ready(function() {
   $(".card__back").click(function(e) {
     let previousCard = $(this).attr("previous");
     $(".card").hide();
-    $("." + previousCard).show();
+    $(`.${previousCard}`).show();
   });
 
 

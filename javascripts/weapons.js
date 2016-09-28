@@ -38,13 +38,13 @@ var Gauntlet = function ($$gauntlet) {
 
   // WeaponRack will hold all defined weapons
   $$gauntlet.WeaponRack = function () {
-    let weaponList = [];
+    let weapon_list = [];
 
     return {
 
       // Method to return the entire collection of weapons
       weapons () {
-        return weaponList;
+        return weapon_list;
       },
 
       // Method to load the weapons from the JSON file
@@ -54,12 +54,12 @@ var Gauntlet = function ($$gauntlet) {
 
             // Iterate all weapon objects in the JSON file
             response.weapons.each(weapon =>
-              weaponList.push(
+              weapon_list.push(
                 __.compose(Weapon, weapon))
               );
 
             // Resolve the weapon loading promise with the weapon list
-            resolve(weaponList);
+            resolve(weapon_list);
 
           }).fail((xhr, error, msg) => {
             reject(msg);

@@ -22,10 +22,12 @@ var Gauntlet = function ($$gauntlet) {
                                           : all_professions.get(current_class.prototype);
 
               // Create the new profession
-              let profession = __.compose(prototype_for_object, current_class);
+              let profession = __.compose(prototype_for_object,
+                                          current_class,
+                                          ObjectExtensions);
 
               // Add a toString() method to each class which displays the label
-              __.def(profession, "toString", () => current_class.label);
+              profession.def("toString", () => current_class.label);
 
               // Add new profession to the Map
               all_professions.set(current_class.id, profession);

@@ -6,7 +6,6 @@ const help = (topic) => {
     console.log("help('monsters' || 'm') -- Show all available monsters.");
     console.log("help('spells' || 's') -- Show all available spells.");
   } else {
-
     let output = "";
 
     switch(topic) {
@@ -37,76 +36,117 @@ const help = (topic) => {
   }
 };
 
-// Create object to which utility functions are added for use in the project
-const __ = (__ => {
-  __.compose = (proto, ...args) => {
-    let target = Object.create(proto)
-    args.each(arg => target = Object.assign(target, arg));
-    return target;
-  };
 
-  __.property = new Proxy(Object.defineProperty, {
+/*
+  This object allows any object to define its own properties and methods.
+  Chainable.
+
+  Usage:
+    let foo = __.compose(Object.create(null), ObjectExtensions);
+    foo.property("propOne", 1).property("prop2", 2).def("fn", () => ({}));
+ */
+const ObjectExtensions = (() => {
+  let o = {};
+
+  o.property = new Proxy(Object.defineProperty, {
     apply: function (_target, _this, _args) {
-      return _target(_args[0], _args[1], {
-        value: _args[2],
+      _target(_this, _args[0], {
+        value: _args[1],
         writable: true,
-        enumerable: true,
-        configurable: true
+        enumerable: true
       });
+
+      return _this;
     }
   });
 
-  __.def = new Proxy(Object.defineProperty, {
+  o.def = new Proxy(Object.defineProperty, {
     apply: function (_target, _this, _args) {
-      return _target(_args[0], _args[1], {
-        value: _args[2],
-        writable: false,
-        enumerable: false,
-        configurable: false
+      _target(_this, _args[0], {
+        value: _args[1],
+        enumerable: true
       });
+
+      return _this;
     }
   });
 
-  __.getURLParameter = name => {
-    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
-  };
+  return Object.freeze(o);
+})();
 
-  return __;
-})({});
+
+
+// Create object to which utility functions are added for use in the project
+const __ = (() => {
+
+  return Object.freeze({
+    compose (proto, ...args) {
+      let target = Object.create(proto)
+      args.each(arg => target = Object.assign(target, arg));
+      return target;
+    },
+
+    getURLParameter (name) {
+      return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+    }
+  });
+
+})();
+
+
 
 // CAUTION: Extend native prototypes only if you understand the consequences
 (() => {
+
+  // Add an `each()` method to Array that is a Proxy to `forEach()`
   if (!("each" in Array.prototype)) {
-    Array.prototype.each = new Proxy(Array.prototype.forEach, {
-      apply: function (_target, _this, _args) {
-        return _target.apply(_this, _args);
-      }
+    Object.defineProperty(Array.prototype, "each", {
+      value: new Proxy(Array.prototype.forEach, {
+        apply: function (_target, _this, _args) {
+          return _target.apply(_this, _args);
+        }
+      }),
+      writable: false,
+      enumerable: false,
+      configurable: false
     });
   }
 
+  // Add an `each()` method to Map that is a Proxy to `forEach()`
   if (!("each" in Map.prototype)) {
-    Map.prototype.each = new Proxy(Map.prototype.forEach, {
-      apply: function (_target, _this, _args) {
-        return _target.apply(_this, _args);
+    Object.defineProperty(Map.prototype, "each", {
+      value: new Proxy(Map.prototype.forEach, {
+        apply: function (_target, _this, _args) {
+          return _target.apply(_this, _args);
+        }
+      })
+    });
+  }
+
+  // Add a `random()` method to Array that is non-enumerable
+  if (!("random" in Array.prototype)) {
+    Object.defineProperty(Array.prototype, "random", {
+      value: function () {
+        return this[Math.floor(Math.random() * this.length)];
       }
     });
   }
 
-  if (!("random" in Array.prototype)) {
-    Array.prototype.random = function () {
-      return this[Math.floor(Math.random() * this.length)];
-    };
-  }
-
+  // Add a `random()` method to Map that is non-enumerable
   if (!("random" in Map.prototype)) {
-    Map.prototype.random = function () {
-      return [...this.values()].random();
-    };
+    Object.defineProperty(Map.prototype, "random", {
+      value: function () {
+        return [...this.values()].random();
+      }
+    });
   }
 
+  // Add a `random()` method to Set that is non-enumerable
   if (!("random" in Set.prototype)) {
-    Set.prototype.random = function () {
-      return [...this].random();
-    };
+    Object.defineProperty(Set.prototype, "random", {
+      value: function () {
+        return [...this.values()].random();
+      }
+    });
   }
 })();

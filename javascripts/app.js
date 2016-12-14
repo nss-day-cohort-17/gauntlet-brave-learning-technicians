@@ -68,6 +68,7 @@ $("#class-select .btn__text").click( function(){
 $("#weapon-select .btn__text").click( function(){
   var bacon = $(this).html();
   console.log(bacon)
+
 })
 
 

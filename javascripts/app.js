@@ -31,6 +31,14 @@ $(document).ready(function() {
   $(".card__link").click(function(e) {
     var nextCard = $(this).attr("next");
     var moveAlong = false;
+//stored the input name
+    var inputName = document.getElementById("player-name").value
+
+//trying to set a template for battleground page
+   $("#battleground").html ( `<div>
+                                      <h3>${inputName.toUpperCase()}</h3>
+
+                              </div>`)
 
     switch (nextCard) {
       case "card--class":
@@ -39,6 +47,11 @@ $(document).ready(function() {
       case "card--weapon":
         moveAlong = ($("#player-name").val() !== "");
         break;
+        case "card--battleground":
+        moveAlong = ($("#player-name").val() !== "");
+        break;
+
+
     }
 
     if (moveAlong) {

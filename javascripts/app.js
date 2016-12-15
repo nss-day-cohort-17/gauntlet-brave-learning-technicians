@@ -87,6 +87,15 @@ $("#weapon-select .youAreHere").click( function(){
   Gauntlet.Combatants.Human.prototype.weapon = finalWeapon;
   console.log(Gauntlet.Combatants)
 })
+//event for generating the enemies
+$(".getEnemy").click (function (){
+
+  orc
+
+  //$("#enemyCard").html ("Health: " +health+ `<p>${generateClass}</p>`)
+
+  console.log(enemy)
+})
 
 
 

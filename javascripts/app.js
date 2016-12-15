@@ -158,14 +158,11 @@ $("#attackButton").click( function() {
 
 
 
-// if(humanHealthTotal !<= 0 && orcHelathTotal !<= 0){
-//   warriorHealthTotal =warriorHealthTotal - orcAD;
-//   orcHelathTotal = orcHelathTotal - warriorAD;
-//
-//
-//
-// }else if(warriorHealthTotal <=0){
-//   //YOU DIED
-// }else if(orcHelathTotal <= 0){
-//   //YOU WIN
-// };
+if (warriorHealthTotal > 0 && orcHealthTotal > 0){
+  warriorHealthTotal =warriorHealthTotal - orcAD;
+  orcHelathTotal = orcHelathTotal - warriorAD;
+}else if(warriorHealthTotal <=0){
+  $('#gameOver').html('<h2>You have been vanquished. Good luck in the next life.</h2>')
+}else if(orcHelathTotal <= 0){
+  $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2>')
+};

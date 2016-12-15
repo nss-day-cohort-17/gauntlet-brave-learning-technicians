@@ -17,12 +17,7 @@ console.log(warrior.toString());
 var spell = new Gauntlet.SpellBook.Sphere();
 console.log("spell: ", spell.toString());
 
-// assign name from text field to warrior
 $(document).ready(function() {
-$(".getMeName").click( function setName () {
-  warrior.playerName = $('#player-name').val();
-  console.log(warrior.toString());
-})
 
   /*
     Show the initial view that accepts player name
@@ -64,9 +59,11 @@ $(".getMeName").click( function setName () {
     $("." + previousCard).show();
   });
 
-
-
-
+// assign name from text field to warrior
+$(".getMeName").click( function setName () {
+  warrior.playerName = $('#player-name').val();
+  console.log(warrior.toString());
+})
 
  // $(this).data('class');
 
@@ -123,8 +120,6 @@ console.log(Gauntlet.Combatants);
 // console.log(Gauntlet.Combatants);
 //
 //
-
-
 
 
 });

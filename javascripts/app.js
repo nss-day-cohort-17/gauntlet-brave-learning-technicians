@@ -17,8 +17,13 @@ console.log(warrior.toString());
 var spell = new Gauntlet.SpellBook.Sphere();
 console.log("spell: ", spell.toString());
 
-
+// assign name from text field to warrior
 $(document).ready(function() {
+$(".getMeName").click( function setName () {
+  warrior.playerName = $('#player-name').val();
+  console.log(warrior.toString());
+})
+
   /*
     Show the initial view that accepts player name
    */
@@ -87,6 +92,12 @@ $("#weapon-select .youAreHere").click( function(){
   console.log(Gauntlet.Combatants)
 })
 
+// Attack button function
+$("#attackButton").click( function() {
+  console.log("Initial Player Health: " , Gauntlet.Combatants.Human.prototype.health)
+  console.log("Initial Enemy Health: ", Gauntlet.Combatants.Orc.prototype.__proto__.health)
+
+})
 
 
 
@@ -118,6 +129,7 @@ var humanHealthTotal = Gauntlet.Combatants.Human.prototype.health + Gauntlet.Com
 
 
 
+
 // if(humanHealthTotal !<= 0 && orcHelathTotal !<= 0){
 //   humanHealthTotal = humanHealthTotal - orcAD;
 //   orcHelathTotal = orcHelathTotal - humanAD;
@@ -129,6 +141,7 @@ var humanHealthTotal = Gauntlet.Combatants.Human.prototype.health + Gauntlet.Com
 // }else if(orcHelathTotal <= 0){
 //   //YOU WIN
 // };
+
 
 
 

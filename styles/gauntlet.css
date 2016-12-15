@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 10px;
   font-size: 3em;
+  background-image: url(http://i.imgur.com/Oda5MtB.jpg);
 }
 
 .field {
@@ -21,6 +22,7 @@ body {
   margin-top: 50px;
   border: 3px solid black;
   border-radius: 10px;
+  background-color: #bbb;
 }
 
 /* positioning attack button */

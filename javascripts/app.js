@@ -58,8 +58,14 @@ $(document).ready(function() {
     $(".card").hide();
     $("." + previousCard).show();
   });
+//get name form input
 
-
+  // debugger
+  // var playerName = $("#player-name").val()
+  // console.log(playerName)
+  var playerName = new Gauntlet.Combatants.Human()
+  playerName.name = $("#player-name").val()
+  console.log(playerName.name)
 
 
 
@@ -67,6 +73,7 @@ $(document).ready(function() {
 
 $("#class-select .youAreHere").click( function(e){
   // debugger
+
   var selectedClass = $(e.target).attr("data-class");
   console.log(selectedClass)
   var finalClass = new Gauntlet.GuildHall[selectedClass]()
@@ -87,22 +94,8 @@ $("#weapon-select .youAreHere").click( function(){
   Gauntlet.Combatants.Human.prototype.weapon = finalWeapon;
   console.log(Gauntlet.Combatants)
 })
-//event for generating the enemies
-$(".getEnemy").click (function (){
 
-  orc
-
-  //$("#enemyCard").html ("Health: " +health+ `<p>${generateClass}</p>`)
-
-  console.log(enemy)
-})
-
-
-
-
-
-
-
+$(".getEnemy").click(function() {
 var orc = new Gauntlet.Combatants.Orc();
 var oClass = orc.generateClass();
 Gauntlet.Combatants.Orc.prototype.__proto__.class = oClass;
@@ -110,9 +103,9 @@ Gauntlet.Combatants.Orc.prototype.__proto__.class = oClass;
 // var oHurt = orc.setWeapon(new BroadSword());
 Gauntlet.Combatants.Orc.prototype.__proto__.weapon = new BroadSword();
 console.log(Gauntlet.Combatants);
-
-
-
+$("#playerCard").html("Name :")
+$("#enemyCard").html("Name : "+Gauntlet.Combatants.Orc.prototype.__proto__.class.name + `<p> Health : ${Gauntlet.Combatants.Orc.prototype.health}</p>`)
+console.log()
 //
 //
 // var orc = new Gauntlet.Combatants.Orc();
@@ -123,7 +116,7 @@ console.log(Gauntlet.Combatants);
 //
 
 
-
+});
 
 
 

@@ -6,10 +6,10 @@ warrior.setWeapon(new WarAxe());
 warrior.generateClass();  // This will be used for "Surprise me" option
 console.log(warrior.toString());
 
-var orc = new Gauntlet.Combatants.Orc();
-orc.generateClass();
-orc.setWeapon(new BroadSword());
-console.log(orc.toString());
+// var orc = new Gauntlet.Combatants.Orc();
+// orc.generateClass();
+// orc.setWeapon(new BroadSword());
+// console.log(orc.toString());
 
 /*
   Test code to generate a spell
@@ -96,6 +96,39 @@ $(".getEnemy").click (function (){
 
   console.log(enemy)
 })
+
+
+
+
+
+
+
+var orc = new Gauntlet.Combatants.Orc();
+var oClass = orc.generateClass();
+Gauntlet.Combatants.Orc.prototype.__proto__.class = oClass;
+
+// var oHurt = orc.setWeapon(new BroadSword());
+Gauntlet.Combatants.Orc.prototype.__proto__.weapon = new BroadSword();
+console.log(Gauntlet.Combatants);
+
+
+
+//
+//
+// var orc = new Gauntlet.Combatants.Orc();
+// orc.generateClass();
+// orc.setWeapon(new BroadSword());
+// console.log(Gauntlet.Combatants);
+//
+//
+
+
+
+
+
+
+
+
 
 
 

@@ -120,6 +120,15 @@ var orcHealthTotal = orc.health + orc.class.healthBonus
 $("#attackButton").click( function() {
   console.log("Initial Player Health: " , warriorHealthTotal)
   console.log("Initial Enemy Health: ", orcHealthTotal)
+
+  if (warriorHealthTotal > 0 && orcHealthTotal > 0){
+    warriorHealthTotal =warriorHealthTotal - orcAD;
+    orcHealthTotal = orcHealthTotal - warriorAD;
+  } else if(warriorHealthTotal <=0){
+    $('#gameOver').html('<h2>You have been vanquished. Good luck in the next life.</h2>')
+  } else if(orcHealthTotal <= 0){
+    $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2>')
+  };
 })
 
 // got the intial stats of player and Enemy
@@ -150,14 +159,3 @@ $(".getEnemy").click(function (){
 // var warriorAD = damage(Gauntlet.Combatants.Human)
 //
 // var orcAD = damage(Gauntlet.Combatants.Orc)
-
-
-
-if (warriorHealthTotal > 0 && orcHealthTotal > 0){
-  warriorHealthTotal =warriorHealthTotal - orcAD;
-  orcHealthTotal = orcHealthTotal - warriorAD;
-}else if(warriorHealthTotal <=0){
-  $('#gameOver').html('<h2>You have been vanquished. Good luck in the next life.</h2>')
-}else if(orcHealthTotal <= 0){
-  $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2>')
-};

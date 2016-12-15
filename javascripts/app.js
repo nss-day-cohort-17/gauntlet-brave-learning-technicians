@@ -18,7 +18,6 @@ var spell = new Gauntlet.SpellBook.Sphere();
 console.log("spell: ", spell.toString());
 
 // assign name from text field to warrior
-$(document).ready(function() {
 $(".getMeName").click( function setName () {
   warrior.playerName = $('#player-name').val();
   // console.log(warrior.toString());
@@ -42,7 +41,8 @@ var warriorHealthTotal
         break;
       case "card--weapon":
         moveAlong = ($("#player-name").val() !== "");
-        warriorHealthTotal = Gauntlet.Combatants.Human.prototype.health + Gauntlet.Combatants.Human.prototype.class.healthBonus;
+        // debugger
+        // warriorHealthTotal = warrior.health + warrior.class.healthBonus;
         break;
       case "card--battleground":
         moveAlong = ($("#player-name").val() !== "");
@@ -78,7 +78,7 @@ $("#class-select .youAreHere").click( function(e){
 
   console.log(finalClass)
   console.log(Gauntlet.Combatants)
-  Gauntlet.Combatants.Human.prototype.class = finalClass;
+  Gauntlet.Combatants.Human.class = finalClass;
   console.log(Gauntlet.Combatants)
 })
 
@@ -89,7 +89,7 @@ $("#weapon-select .youAreHere").click( function(){
 
   console.log(finalWeapon)
   console.log(Gauntlet.Combatants)
-  Gauntlet.Combatants.Human.prototype.weapon = finalWeapon;
+  Gauntlet.Combatants.Human.weapon = finalWeapon;
   console.log(Gauntlet.Combatants)
 })
 
@@ -97,13 +97,13 @@ $("#weapon-select .youAreHere").click( function(){
 
 var orc = new Gauntlet.Combatants.Orc();
 var oClass = orc.generateClass();
-Gauntlet.Combatants.Orc.prototype.__proto__.class = oClass;
+Gauntlet.Combatants.Orc.class = oClass;
 
-Gauntlet.Combatants.Orc.prototype.__proto__.weapon = new BroadSword();
+Gauntlet.Combatants.Orc.weapon = new BroadSword();
 console.log(Gauntlet.Combatants);
 
 
-var orcHelathTotal = Gauntlet.Combatants.Orc.prototype.__proto__.health + Gauntlet.Combatants.Orc.prototype.__proto__.class.healthBonus
+var orcHelathTotal = Gauntlet.Combatants.Orc.health + Gauntlet.Combatants.Orc.class.healthBonus
 
 // Attack button function
 $("#attackButton").click( function() {
@@ -113,8 +113,8 @@ $("#attackButton").click( function() {
 
 // // Attack button function
 // $("#attackButton").click( function() {
-//   console.log("Initial Player Health: " , Gauntlet.Combatants.Human.prototype.health)
-//   console.log("Initial Enemy Health: ", Gauntlet.Combatants.Orc.prototype.__proto__.health)
+//   console.log("Initial Player Health: " , Gauntlet.Combatants.Human.health)
+//   console.log("Initial Enemy Health: ", Gauntlet.Combatants.Orc.health)
 
 })
 
@@ -127,9 +127,9 @@ $("#attackButton").click( function() {
 // };
 //
 //
-// var warriorAD = damage(Gauntlet.Combatants.Human.prototype)
+// var warriorAD = damage(Gauntlet.Combatants.Human)
 //
-// var orcAD = damage(Gauntlet.Combatants.Orc.prototype.__proto__)
+// var orcAD = damage(Gauntlet.Combatants.Orc)
 
 
 
@@ -146,11 +146,3 @@ $("#attackButton").click( function() {
 // }else if(orcHelathTotal <= 0){
 //   //YOU WIN
 // };
-
-
-
-
-
-
-
-});

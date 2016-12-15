@@ -88,6 +88,11 @@ $("#weapon-select .youAreHere").click( function(){
   console.log(Gauntlet.Combatants)
 })
 
+// Attack button function
+$("#attackButton").click( function() {
+  console.log(Gauntlet.Combatants.Human.prototype.health)
+
+})
 
 
 });

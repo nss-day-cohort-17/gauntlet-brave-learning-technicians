@@ -58,3 +58,36 @@ $(document).ready(function() {
     $(".card").hide();
     $("." + previousCard).show();
   });
+
+
+
+
+
+ // $(this).data('class');
+
+$("#class-select .youAreHere").click( function(e){
+  // debugger
+  var selectedClass = $(e.target).attr("data-class");
+  console.log(selectedClass)
+  var finalClass = new Gauntlet.GuildHall[selectedClass]()
+
+  console.log(finalClass)
+  console.log(Gauntlet.Combatants)
+  Gauntlet.Combatants.Human.prototype.class = finalClass;
+  console.log(Gauntlet.Combatants)
+})
+
+$("#weapon-select .youAreHere").click( function(){
+  var selectedWeapon = $(this).attr("data-class");
+  console.log(selectedWeapon)
+  var finalWeapon = new window[selectedWeapon]()
+
+  console.log(finalWeapon)
+  console.log(Gauntlet.Combatants)
+  Gauntlet.Combatants.Human.prototype.weapon = finalWeapon;
+  console.log(Gauntlet.Combatants)
+})
+
+
+
+});

@@ -28,3 +28,5 @@ var WarAxe = function() {
   this.hands = 2;
 };
 WarAxe.prototype = new Weapon();
+
+ 

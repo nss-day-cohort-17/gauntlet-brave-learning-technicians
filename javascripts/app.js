@@ -62,6 +62,7 @@ $(document).ready(function() {
 
 
 
+
  // $(this).data('class');
 
 $("#class-select .youAreHere").click( function(e){

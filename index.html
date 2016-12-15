@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div class="container-fluid">
+      <div id="choosePath" class="container-fluid">
         <div class="row">
           <div class="col-sm-4">
             <div class="card__button">
@@ -150,6 +150,7 @@
             <span class="btn__prompt">&lt;</span>
             <span class="btn__text">Back</span>
           </a>
+
         </div>
       </div>
       <div class="container-fluid">
@@ -174,6 +175,7 @@
               </a>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -188,9 +190,28 @@
       </div>
     </section>
 
-    <section id="battleground" class="card card--battleground">
-      <div class="card__prompt">
-        <div>hey there</div>
+    <section id="battleground" class="card card--battleground" class="container">
+      <div class="card__prompt" class="row">
+        <div id="playerCard" class="col-md-3 col-md-offset-1">
+          --your name <br>
+          class <br>
+          weapon <br>
+          stats--
+        </div>
+        <div id="attackButton" class="col-md-1" class="card__button">
+          <a class="card__link btn btn--big btn--orange"
+             href="#"
+             next="card--class">
+            <span class="btn__prompt">></span>
+            <span class="btn__text"> Attack enemy!</span>
+          </a>
+        </div>
+        <div id="enemyCard" class="col-md-3 col-md-offset-3">
+          --enemy <br>
+          class <br>
+          weapon <br>
+          stats--
+        </div>
       </div>
     </section>
 

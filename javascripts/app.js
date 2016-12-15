@@ -18,6 +18,10 @@ var warrior = new Gauntlet.Combatants.Human();
 // console.log("spell: ", spell.toString());
 
 
+// assign name from text field to warrior
+$(".getMeName").click( function setName () {
+  warrior.playerName = $('#player-name').val();
+})
 
 
   // console.log(warrior.toString());
@@ -65,12 +69,6 @@ var warriorHealthTotal
     $("." + previousCard).show();
   });
 
-
-// assign name from text field to warrior
-$(".getMeName").click( function setName () {
-  warrior.playerName = $('#player-name').val();
-  console.log(warrior.toString());
-})
 
  // $(this).data('class');
 
@@ -140,13 +138,8 @@ $(".getEnemy").click(function (){
 
 
 // // Attack button function
-// $("#attackButton").click( function() {
-//   console.log("Initial Player Health: " , Gauntlet.Combatants.Human.health)
-//   console.log("Initial Enemy Health: ", Gauntlet.Combatants.Orc.health)
+// $("#attackButton").click( damage() )
 
-
-
-//
 // function damage(){
 //   var randomHurt = Math.round(Math.random()+1);
 //   var hurtRng = (Math.round(((this.strength + (this.class.strengthBonus/2))/4)) + (this.weapon.damage/randomHurt)
@@ -162,9 +155,9 @@ $(".getEnemy").click(function (){
 
 if (warriorHealthTotal > 0 && orcHealthTotal > 0){
   warriorHealthTotal =warriorHealthTotal - orcAD;
-  orcHelathTotal = orcHelathTotal - warriorAD;
+  orcHealthTotal = orcHealthTotal - warriorAD;
 }else if(warriorHealthTotal <=0){
   $('#gameOver').html('<h2>You have been vanquished. Good luck in the next life.</h2>')
-}else if(orcHelathTotal <= 0){
+}else if(orcHealthTotal <= 0){
   $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2>')
 };

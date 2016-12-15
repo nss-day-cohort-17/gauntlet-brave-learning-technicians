@@ -23,7 +23,6 @@ $(document).ready(function() {
     Show the initial view that accepts player name
    */
   $("#player-setup").show();
-
   /*
     When any button with card__link class is clicked,
     move on to the next view.
@@ -92,31 +91,44 @@ $("#weapon-select .youAreHere").click( function(){
 
 
 
-
-
 var orc = new Gauntlet.Combatants.Orc();
 var oClass = orc.generateClass();
 Gauntlet.Combatants.Orc.prototype.__proto__.class = oClass;
 
-// var oHurt = orc.setWeapon(new BroadSword());
 Gauntlet.Combatants.Orc.prototype.__proto__.weapon = new BroadSword();
 console.log(Gauntlet.Combatants);
 
 
 
+// function damage(e){
+//   var randomHurt = Math.round(Math.random()+1);
+//   var hurtRng = (Math.round(((this.strength + (this.class.strengthBonus/2))/4)) + (this.weapon.damage/randomHurt)
+//   return hurtRng;
+// };
 //
 //
-// var orc = new Gauntlet.Combatants.Orc();
-// orc.generateClass();
-// orc.setWeapon(new BroadSword());
-// console.log(Gauntlet.Combatants);
+// var humanAD = damage(Gauntlet.Combatants.Human.prototype)
+//
+// var orcAD = damage(Gauntlet.Combatants.Orc.prototype.__proto__)
+//
+var humanHealthTotal = Gauntlet.Combatants.Human.prototype.health + Gauntlet.Combatants.Human.prototype.class.healthBonus
+//
+// var orcHelathTotal = Gauntlet.Combatants.Orc.prototype.__proto__.health + Gauntlet.Combatants.Orc.prototype.__proto__.class.healthBonus
+//
+
+
+
+// if(humanHealthTotal !<= 0 && orcHelathTotal !<= 0){
+//   humanHealthTotal = humanHealthTotal - orcAD;
+//   orcHelathTotal = orcHelathTotal - humanAD;
 //
 //
-
-
-
-
-
+//
+// }else if(humanHealthTotal <=0){
+//   //YOU DIED
+// }else if(orcHelathTotal <= 0){
+//   //YOU WIN
+// };
 
 
 

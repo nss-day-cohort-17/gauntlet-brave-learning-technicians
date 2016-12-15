@@ -6,18 +6,17 @@ var warrior = new Gauntlet.Combatants.Human();
 // warrior.generateClass();  // This will be used for "Surprise me" option
 // console.log(warrior.toString());
 
-var orc = new Gauntlet.Combatants.Orc();
-orc.generateClass();
-orc.setWeapon(new BroadSword());
-console.log(orc.toString());
+// var orc = new Gauntlet.Combatants.Orc();
+// orc.generateClass();
+// orc.setWeapon(new BroadSword());
+// console.log(orc.toString());
 
 /*
   Test code to generate a spell
  */
-var spell = new Gauntlet.SpellBook.Sphere();
-console.log("spell: ", spell.toString());
+// var spell = new Gauntlet.SpellBook.Sphere();
+// console.log("spell: ", spell.toString());
 
-$(document).ready(function() {
 
 
 
@@ -43,7 +42,8 @@ var warriorHealthTotal
         break;
       case "card--weapon":
         moveAlong = ($("#player-name").val() !== "");
-        warriorHealthTotal = Gauntlet.Combatants.Human.prototype.health + Gauntlet.Combatants.Human.prototype.class.healthBonus;
+        // debugger
+        warriorHealthTotal = warrior.health + warrior.class.healthBonus;
         break;
       case "card--battleground":
         moveAlong = ($("#player-name").val() !== "");
@@ -80,8 +80,8 @@ $("#class-select .youAreHere").click( function(e){
   var finalClass = new Gauntlet.GuildHall[selectedClass]()
 
   console.log(finalClass)
-  console.log(Gauntlet.Combatants)
-  Gauntlet.Combatants.Human.prototype.class = finalClass;
+  // console.log(Gauntlet.Combatants)
+  warrior.class = finalClass;
   console.log(Gauntlet.Combatants)
 })
 
@@ -91,19 +91,19 @@ $("#weapon-select .youAreHere").click( function(){
   var finalWeapon = new window[selectedWeapon]()
 
   console.log(finalWeapon)
-  console.log(Gauntlet.Combatants)
-  Gauntlet.Combatants.Human.prototype.weapon = finalWeapon;
+  // console.log(Gauntlet.Combatants)
+  warrior.weapon = finalWeapon;
   console.log(Gauntlet.Combatants)
 })
 
 
 
 // Attack button function
-$("#attackButton").click( function() {
-  console.log("Initial Player Health: " , warrior.health)
-  console.log("Initial Enemy Health: ", orc.health)
-
-})
+// $("#attackButton").click( function() {
+//   console.log("Initial Player Health: " , warrior.health)
+//   console.log("Initial Enemy Health: ", orc.health)
+//
+// })
 
 
 
@@ -111,38 +111,40 @@ var orc = new Gauntlet.Combatants.Orc();
 var oClass = orc.generateClass();
 orc.class = oClass;
 
-
-// var oHurt = orc.setWeapon(new BroadSword());
 orc.weapon = new BroadSword();
 
 console.log(Gauntlet.Combatants);
+
+//setting orc total health
+var orcHealthTotal = orc.health + orc.class.healthBonus
+
+// Attack button function
+$("#attackButton").click( function() {
+  console.log("Initial Player Health: " , warriorHealthTotal)
+  console.log("Initial Enemy Health: ", orcHealthTotal)
+})
+
 // got the intial stats of player and Enemy
 $(".getEnemy").click(function (){
-  $("#playerCard").html(`<h3>Player : ${warrior.playerName} </h3> <h5>Health : ${warrior.health}</h5>
+  $("#playerCard").html(`<h3>Player : ${warrior.playerName} </h3> <h5>Health : ${warriorHealthTotal}</h5>
                         <h5>Character : ${warrior.class.name}</h5><h5>Weapon : ${warrior.weapon.name}</h5>`)
-  $("#enemyCard").html(`<h3>Enemy :${orc.class} <h3> <h5>Health : ${orc.health}
+  $("#enemyCard").html(`<h3>Enemy :${orc.class} <h3> <h5>Health : ${orcHealthTotal}
                       <h5>Weapon : ${orc.weapon.name}</h5>`)
 
 
 });
 
 
-var orcHelathTotal = orc.health + orc.class.healthBonus
 
-// Attack button function
-$("#attackButton").click( function() {
-  console.log("Initial Player Health: " , warriorHealthTotal)
-  console.log("Initial Enemy Health: ", orcHelathTotal)
+
 
 
 // // Attack button function
 // $("#attackButton").click( function() {
-//   console.log("Initial Player Health: " , Gauntlet.Combatants.Human.prototype.health)
-//   console.log("Initial Enemy Health: ", Gauntlet.Combatants.Orc.prototype.__proto__.health)
+//   console.log("Initial Player Health: " , Gauntlet.Combatants.Human.health)
+//   console.log("Initial Enemy Health: ", Gauntlet.Combatants.Orc.health)
 
-})
 
-})
 
 //
 // function damage(){
@@ -152,9 +154,9 @@ $("#attackButton").click( function() {
 // };
 //
 //
-// var warriorAD = damage(Gauntlet.Combatants.Human.prototype)
+// var warriorAD = damage(Gauntlet.Combatants.Human)
 //
-// var orcAD = damage(Gauntlet.Combatants.Orc.prototype.__proto__)
+// var orcAD = damage(Gauntlet.Combatants.Orc)
 
 
 

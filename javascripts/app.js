@@ -14,8 +14,8 @@ var warrior = new Gauntlet.Combatants.Human();
 /*
   Test code to generate a spell
  */
-var spell = new Gauntlet.SpellBook.Sphere();
-console.log("spell: ", spell.toString());
+// var spell = new Gauntlet.SpellBook.Sphere();
+// console.log("spell: ", spell.toString());
 
 // assign name from text field to warrior
 $(".getMeName").click( function setName () {
@@ -42,7 +42,7 @@ var warriorHealthTotal
       case "card--weapon":
         moveAlong = ($("#player-name").val() !== "");
         // debugger
-        // warriorHealthTotal = warrior.health + warrior.class.healthBonus;
+        warriorHealthTotal = warrior.health + warrior.class.healthBonus;
         break;
       case "card--battleground":
         moveAlong = ($("#player-name").val() !== "");
@@ -78,7 +78,7 @@ $("#class-select .youAreHere").click( function(e){
 
   console.log(finalClass)
   console.log(Gauntlet.Combatants)
-  Gauntlet.Combatants.Human.class = finalClass;
+  warrior.class = finalClass;
   console.log(Gauntlet.Combatants)
 })
 
@@ -89,7 +89,7 @@ $("#weapon-select .youAreHere").click( function(){
 
   console.log(finalWeapon)
   console.log(Gauntlet.Combatants)
-  Gauntlet.Combatants.Human.weapon = finalWeapon;
+  warrior.weapon = finalWeapon;
   console.log(Gauntlet.Combatants)
 })
 
@@ -97,18 +97,18 @@ $("#weapon-select .youAreHere").click( function(){
 
 var orc = new Gauntlet.Combatants.Orc();
 var oClass = orc.generateClass();
-Gauntlet.Combatants.Orc.class = oClass;
+orc.class = oClass;
 
-Gauntlet.Combatants.Orc.weapon = new BroadSword();
+orc.weapon = new BroadSword();
 console.log(Gauntlet.Combatants);
 
 
-var orcHelathTotal = Gauntlet.Combatants.Orc.health + Gauntlet.Combatants.Orc.class.healthBonus
+var orcHealthTotal = orc.health + orc.class.healthBonus
 
 // Attack button function
 $("#attackButton").click( function() {
   console.log("Initial Player Health: " , warriorHealthTotal)
-  console.log("Initial Enemy Health: ", orcHelathTotal)
+  console.log("Initial Enemy Health: ", orcHealthTotal)
 
 
 // // Attack button function

@@ -58,19 +58,3 @@ $(document).ready(function() {
     $(".card").hide();
     $("." + previousCard).show();
   });
-
-
-$("#class-select .btn__text").click( function(){
-  var bacon = $(this).html();
-  console.log(bacon)
-})
-
-$("#weapon-select .btn__text").click( function(){
-  var bacon = $(this).html();
-  console.log(bacon)
-
-})
-
-
-
-});

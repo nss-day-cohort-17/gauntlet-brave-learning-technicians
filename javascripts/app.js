@@ -6,10 +6,10 @@ var warrior = new Gauntlet.Combatants.Human();
 // warrior.generateClass();  // This will be used for "Surprise me" option
 // console.log(warrior.toString());
 
-// var orc = new Gauntlet.Combatants.Orc();
-// orc.generateClass();
-// orc.setWeapon(new BroadSword());
-// console.log(orc.toString());
+var orc = new Gauntlet.Combatants.Orc();
+orc.generateClass();
+orc.setWeapon(new BroadSword());
+console.log(orc.toString());
 
 /*
   Test code to generate a spell
@@ -18,11 +18,18 @@ var warrior = new Gauntlet.Combatants.Human();
 // console.log("spell: ", spell.toString());
 
 // assign name from text field to warrior
+
 $(".getMeName").click( function setName () {
   warrior.playerName = $('#player-name').val();
-  // console.log(warrior.toString());
+
 })
+
+
+
+  // console.log(warrior.toString());
+
 var warriorHealthTotal
+
   /*
     Show the initial view that accepts player name
    */
@@ -64,14 +71,9 @@ var warriorHealthTotal
     $("." + previousCard).show();
   });
 
-
-
-
-
  // $(this).data('class');
 
 $("#class-select .youAreHere").click( function(e){
-  // debugger
   var selectedClass = $(e.target).attr("data-class");
   console.log(selectedClass)
   var finalClass = new Gauntlet.GuildHall[selectedClass]()
@@ -95,12 +97,32 @@ $("#weapon-select .youAreHere").click( function(){
 
 
 
+// Attack button function
+$("#attackButton").click( function() {
+  console.log("Initial Player Health: " , warrior.health)
+  console.log("Initial Enemy Health: ", orc.health)
+
+})
+
+
+
 var orc = new Gauntlet.Combatants.Orc();
 var oClass = orc.generateClass();
 orc.class = oClass;
 
 orc.weapon = new BroadSword();
+
 console.log(Gauntlet.Combatants);
+// got the intial stats of player and Enemy
+$(".getEnemy").click(function (){
+  $("#playerCard").html(`<h3>Player : ${warrior.playerName} </h3> <h5>Health : ${warrior.health}</h5>
+                        <h5>Character : ${warrior.class.name}</h5><h5>Weapon : ${warrior.weapon.name}</h5>`)
+  $("#enemyCard").html(`<h3>Enemy :${orc.class} <h3> <h5>Health : ${orc.health}
+                      <h5>Weapon : ${orc.weapon.name}</h5>`)
+
+
+});
+
 
 
 var orcHealthTotal = orc.health + orc.class.healthBonus
@@ -118,6 +140,7 @@ $("#attackButton").click( function() {
 
 })
 
+})
 
 //
 // function damage(){

@@ -165,7 +165,7 @@
       </div>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-sm-4">
+          <div class="col-sm-4 col-sm-offset-4">
             <div class="card__button">
               <a class="class__link btn btn--big btn--blue" href="#">
                 <span class="btn__prompt">></span>
@@ -200,32 +200,35 @@
       </div>
     </section>
 
-    <section id="battleground" class="card card--battleground" class="container">
-      <div class="card__prompt" class="row">
-        <div id="playerCard" class="col-md-3 col-md-offset-1">
-          --your name <br>
-          class <br>
-          weapon <br>
-          stats--
+    <section id="battleground" class="card card--battleground">
+      <div class="card__prompt container-fluid">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <div id="playerCard">
+              --your name <br>
+              class <br>
+              weapon <br>
+              stats--
+            </div>
+            <div id="battleReport"></div>
+            <div id="attackButton" class="card__button">
+              <a class="btn btn--big btn--orange"
+                 href="#"
+                 next="card--class">
+                <span class="btn__prompt">></span>
+                <span class="btn__text"> Attack enemy!</span>
+              </a><br>
+            </div>
+            <div id="enemyCard">
+              --enemy <br>
+              class <br>
+              weapon <br>
+              stats--
+            </div>
+            <div id="gameOver"></div>
+          </div>
         </div>
-        <div id="attackButton" class="col-md-1" class="card__button">
-          <a class="btn btn--big btn--orange"
-             href="#"
-             next="card--class">
-            <span class="btn__prompt">></span>
-            <span class="btn__text"> Attack enemy!</span>
-          </a><br>
-        </div>
-        <div id="enemyCard" class="col-md-3 col-md-offset-3">
-          --enemy <br>
-          class <br>
-          weapon <br>
-          stats--
-        </div>
-      </div>
-      <div>
-        <div id="battleReport" class="col-md-12 col-md-offest-2"></div>
-        <div id="gameOver" class="col-md-4 col-md-offset-2"></div>
+
       </div>
       <!-- <div id="gameOver">
       <button id="playAgain" class="playAgain btn__text btn btn--big btn--orange col-md-4 col-md-offset-4"> Play Again</button>

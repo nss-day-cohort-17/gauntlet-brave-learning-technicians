@@ -131,7 +131,7 @@ $("#attackButton").click( function() {
      }else if(warriorHealthTotal <=0){
        $("#battleReport").html(`<h4>You hit the orc ${orc.class} for ${warriorAD} damage!</h4>
                              <h4>The Orc ${orc.class} hit you for ${orcAD} damage!</h4>`)
-       $('#gameOver').html('<h2>You have been vanquished. Good luck in the next life.</h2>')
+       $('#gameOver').html('<h2>You have been vanquished. Good luck in the next life.</h2><button id="playAgain" class="btn-text">Play Again!</button>')
        $("#playerCard").hide()
        $("#enemyCard").hide()
        $("#attackButton").hide()
@@ -140,11 +140,14 @@ $("#attackButton").click( function() {
     }else{
       $("#battleReport").html(`<h4>You hit the orc ${orc.class} for ${warriorAD} damage!</h4>
                             <h4>The Orc ${orc.class} hit you for ${orcAD} damage!</h4>`)
-      $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2>')
+      $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2><button id="playAgain" class="btn-text">Play Again!</button>')
       $("#playerCard").hide()
       $("#enemyCard").hide()
       $("#attackButton").hide()
      };
+     $("#playAgain").click(function goBack(){
+      window.history.go(0)
+     })
   }
 });
 

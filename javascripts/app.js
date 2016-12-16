@@ -122,7 +122,7 @@ $("#attackButton").click( function() {
 
   console.log("Initial Player Health: " , warriorHealthTotal)
   console.log("Initial Enemy Health: ", orcHealthTotal)
-<<<<<<< HEAD
+
 
   if (warriorHealthTotal > 0 && orcHealthTotal > 0){
     warriorHealthTotal =warriorHealthTotal - orcAD;
@@ -133,8 +133,6 @@ $("#attackButton").click( function() {
     $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2>')
   };
 })
-=======
->>>>>>> d385e32f9c2c23c6715d1922eed53cf0ac5a428f
 
   var randomHurt = Math.round(Math.random()+1);
   var warriorAD = ((Math.round(((warrior.strength + (warrior.class.strengthBonus/2))/3)) + (warrior.weapon.damage/randomHurt)))
@@ -180,7 +178,7 @@ $(".getEnemy").click(function (){
   $("#enemyCard").html(`<h3>Enemy :${orc.class} <h3> <h5>Health : ${orcHealthTotal}
                       <h5>Weapon : ${orc.weapon.name}</h5>`)
 
-<<<<<<< HEAD
+
 // // Attack button function
 // $("#attackButton").click( damage() )
 
@@ -194,26 +192,4 @@ $(".getEnemy").click(function (){
 // var warriorAD = damage(Gauntlet.Combatants.Human)
 //
 // var orcAD = damage(Gauntlet.Combatants.Orc)
-=======
 
-});
-
-
-
-
-
-
-
-
-// if(humanHealthTotal !<= 0 && orcHelathTotal !<= 0){
-//   warriorHealthTotal =warriorHealthTotal - orcAD;
-//   orcHelathTotal = orcHelathTotal - warriorAD;
-//
-//
-//
-// }else if(warriorHealthTotal <=0){
-//   //YOU DIED
-// }else if(orcHelathTotal <= 0){
-//   //YOU WIN
-// };
->>>>>>> d385e32f9c2c23c6715d1922eed53cf0ac5a428f

@@ -145,9 +145,9 @@ $("#attackButton").click( function() {
 
 // got the intial stats of player and Enemy
 $(".getEnemy").click(function (){
-  $("#playerCard").html(`<h3>Player : ${warrior.playerName} </h3> <h5>Health : ${warriorHealthTotal}</h5>
+  $("#playerCard").html(`<h2>${warrior.playerName} </h2> <h5>Health : ${warriorHealthTotal}</h5>
                         <h5>Character : ${warrior.class.name}</h5><h5>Weapon : ${warrior.weapon.name}</h5>`)
-  $("#enemyCard").html(`<h3>Enemy :${orc.class} <h3> <h5>Health : ${orcHealthTotal}
+  $("#enemyCard").html(`<h2>Enemy : ${orc.class} <h2> <h5>Health : ${orcHealthTotal}
                       <h5>Weapon : ${orc.weapon.name}</h5>`)
 
 

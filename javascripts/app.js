@@ -105,8 +105,8 @@ $("#attackButton").click( function() {
 
 
     var randomHurt = Math.round(Math.random()+1);
-    var warriorAD = ((Math.round(((warrior.strength + (warrior.class.strengthBonus/2))/3)) + (warrior.weapon.damage/randomHurt)))
-    var orcAD = ((Math.round(((orc.strength + (orc.class.strengthBonus/2))/4)) + (orc.weapon.damage/randomHurt)))
+    var warriorAD = ((Math.round(((warrior.strength + (warrior.class.strengthBonus/3))/3)) + (warrior.weapon.damage/randomHurt)))
+    var orcAD = ((Math.round(((orc.strength + (orc.class.strengthBonus/3))/4)) + (orc.weapon.damage/randomHurt)))
 
     function damage(){
 
@@ -122,21 +122,28 @@ $("#attackButton").click( function() {
                           <h5>Character : ${warrior.class.name}</h5><h5>Weapon : ${warrior.weapon.name}</h5>`)
     $("#enemyCard").html(`<h3>Enemy :${orc.class} <h3> <h5>Health : ${orcHealthTotal}
                         <h5>Weapon : ${orc.weapon.name}</h5>`)
+    $("#battleReport").html(`<h4>You hit the orc ${orc.class} for ${warriorAD} damage!</h4>
+                          <h4>The Orc ${orc.class} hit you for ${orcAD} damage!</h4>`)
 
 
 
 
      }else if(warriorHealthTotal <=0){
+       $("#battleReport").html(`<h4>You hit the orc ${orc.class} for ${warriorAD} damage!</h4>
+                             <h4>The Orc ${orc.class} hit you for ${orcAD} damage!</h4>`)
        $('#gameOver').html('<h2>You have been vanquished. Good luck in the next life.</h2>')
        $("#playerCard").hide()
        $("#enemyCard").hide()
        $("#attackButton").hide()
 
+
     }else{
-       $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2>')
-       $("#playerCard").hide()
-       $("#enemyCard").hide()
-       $("#attackButton").hide()
+      $("#battleReport").html(`<h4>You hit the orc ${orc.class} for ${warriorAD} damage!</h4>
+                            <h4>The Orc ${orc.class} hit you for ${orcAD} damage!</h4>`)
+      $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2>')
+      $("#playerCard").hide()
+      $("#enemyCard").hide()
+      $("#attackButton").hide()
      };
   }
 });

@@ -35,6 +35,7 @@ var warriorHealthTotal
         break;
       case "card--battleground":
         moveAlong = ($("#player-name").val() !== "");
+        //$("#playAgain").hide()
         //  $('#gameOver').hide()
         break;
     }
@@ -127,17 +128,24 @@ $("#attackButton").click( function() {
 
 
      }else if(warriorHealthTotal <=0){
-       $('#gameOver').html('<h2>You have been vanquished. Good luck in the next life.</h2>')
+       $('#gameOver').html(`<h2>You have been vanquished. Good luck in the next life.</h2><button id="playAgain" class="playAgain btn__text btn btn--big btn--orange">Play Again</button>`)
        $("#playerCard").hide()
        $("#enemyCard").hide()
        $("#attackButton").hide()
+       //$("#playAgain").show()
+
 
     }else{
-       $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2>')
+       $('#gameOver').html(`<h2>You are the victor! Now, bask in your own glory.</h2><button id="playAgain" class="btn__text btn btn--big btn--orange"> Play Again</button>`)
        $("#playerCard").hide()
        $("#enemyCard").hide()
        $("#attackButton").hide()
+       //$("#playAgain").show()
      };
+     //playAgain button event
+     $("#playAgain").click (function goBack() {
+  window.history.go(0);
+})
   }
 });
 

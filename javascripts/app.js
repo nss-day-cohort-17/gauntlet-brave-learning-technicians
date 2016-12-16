@@ -14,8 +14,8 @@ console.log(orc.toString());
 /*
   Test code to generate a spell
  */
-var spell = new Gauntlet.SpellBook.Sphere();
-console.log("spell: ", spell.toString());
+// var spell = new Gauntlet.SpellBook.Sphere();
+// console.log("spell: ", spell.toString());
 
 // assign name from text field to warrior
 $(document).ready(function() {

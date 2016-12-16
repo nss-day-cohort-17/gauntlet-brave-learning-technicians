@@ -1,21 +1,5 @@
-/*
-  Test code to generate a human player and an orc player
- */
+
 var warrior = new Gauntlet.Combatants.Human();
-// warrior.setWeapon(new WarAxe());
-// warrior.generateClass();  // This will be used for "Surprise me" option
-// console.log(warrior.toString());
-
-// var orc = new Gauntlet.Combatants.Orc();
-// orc.generateClass();
-// orc.setWeapon(new BroadSword());
-// console.log(orc.toString());
-
-/*
-  Test code to generate a spell
- */
-// var spell = new Gauntlet.SpellBook.Sphere();
-// console.log("spell: ", spell.toString());
 
 
 // assign name from text field to warrior
@@ -97,13 +81,6 @@ $("#weapon-select .youAreHere").click( function(){
 
 
 
-// Attack button function
-// $("#attackButton").click( function() {
-//   console.log("Initial Player Health: " , warrior.health)
-//   console.log("Initial Enemy Health: ", orc.health)
-//
-// })
-
 
 
 var orc = new Gauntlet.Combatants.Orc();
@@ -125,49 +102,45 @@ $("#attackButton").click( function() {
 
 
   if (warriorHealthTotal > 0 && orcHealthTotal > 0){
-    warriorHealthTotal =warriorHealthTotal - orcAD;
-    orcHealthTotal = orcHealthTotal - warriorAD;
-  } else if(warriorHealthTotal <=0){
-    $('#gameOver').html('<h2>You have been vanquished. Good luck in the next life.</h2>')
-  } else if(orcHealthTotal <= 0){
-    $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2>')
-  };
-})
-
-  var randomHurt = Math.round(Math.random()+1);
-  var warriorAD = ((Math.round(((warrior.strength + (warrior.class.strengthBonus/2))/3)) + (warrior.weapon.damage/randomHurt)))
-  var orcAD = ((Math.round(((orc.strength + (orc.class.strengthBonus/2))/4)) + (orc.weapon.damage/randomHurt)))
-
-  function damage(){
-
-    warriorHealthTotal -= orcAD;
-    orcHealthTotal -= warriorAD;
-  };
-
-damage()
-if (warriorHealthTotal > 0 && orcHealthTotal > 0){
 
 
-  $("#playerCard").html(`<h3>Player : ${warrior.playerName} </h3> <h5>Health : ${warriorHealthTotal}</h5>
-                        <h5>Character : ${warrior.class.name}</h5><h5>Weapon : ${warrior.weapon.name}</h5>`)
-  $("#enemyCard").html(`<h3>Enemy :${orc.class} <h3> <h5>Health : ${orcHealthTotal}
-                      <h5>Weapon : ${orc.weapon.name}</h5>`)
+    var randomHurt = Math.round(Math.random()+1);
+    var warriorAD = ((Math.round(((warrior.strength + (warrior.class.strengthBonus/2))/3)) + (warrior.weapon.damage/randomHurt)))
+    var orcAD = ((Math.round(((orc.strength + (orc.class.strengthBonus/2))/4)) + (orc.weapon.damage/randomHurt)))
+
+    function damage(){
+
+      warriorHealthTotal -= orcAD;
+      orcHealthTotal -= warriorAD;
+    };
+
+  damage()
+  if (warriorHealthTotal > 0 && orcHealthTotal > 0){
+
+
+    $("#playerCard").html(`<h3>Player : ${warrior.playerName} </h3> <h5>Health : ${warriorHealthTotal}</h5>
+                          <h5>Character : ${warrior.class.name}</h5><h5>Weapon : ${warrior.weapon.name}</h5>`)
+    $("#enemyCard").html(`<h3>Enemy :${orc.class} <h3> <h5>Health : ${orcHealthTotal}
+                        <h5>Weapon : ${orc.weapon.name}</h5>`)
 
 
 
 
-   }else if(warriorHealthTotal <=0){
-     $('#gameOver').html('<h2>You have been vanquished. Good luck in the next life.</h2>')
-     $("#playerCard").hide()
-     $("#enemyCard").hide()
-     $("#attackButton").hide()
+     }else if(warriorHealthTotal <=0){
+       $('#gameOver').html('<h2>You have been vanquished. Good luck in the next life.</h2>')
+       $("#playerCard").hide()
+       $("#enemyCard").hide()
+       $("#attackButton").hide()
 
-  }else{
-     $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2>')
-     $("#playerCard").hide()
-     $("#enemyCard").hide()
-     $("#attackButton").hide()
-   };
+
+    }else{
+       $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2>')
+       $("#playerCard").hide()
+       $("#enemyCard").hide()
+       $("#attackButton").hide()
+     };
+  }
+});
 
 
 // got the intial stats of player and Enemy
@@ -176,6 +149,7 @@ $(".getEnemy").click(function (){
                         <h5>Character : ${warrior.class.name}</h5><h5>Weapon : ${warrior.weapon.name}</h5>`)
   $("#enemyCard").html(`<h3>Enemy :${orc.class} <h3> <h5>Health : ${orcHealthTotal}
                       <h5>Weapon : ${orc.weapon.name}</h5>`)
+
 
 
 // // Attack button function
@@ -191,3 +165,5 @@ $(".getEnemy").click(function (){
 // var warriorAD = damage(Gauntlet.Combatants.Human)
 //
 // var orcAD = damage(Gauntlet.Combatants.Orc)
+
+});

@@ -169,7 +169,6 @@ if (warriorHealthTotal > 0 && orcHealthTotal > 0){
      $("#attackButton").hide()
    };
 
-});
 
 // got the intial stats of player and Enemy
 $(".getEnemy").click(function (){
@@ -192,4 +191,3 @@ $(".getEnemy").click(function (){
 // var warriorAD = damage(Gauntlet.Combatants.Human)
 //
 // var orcAD = damage(Gauntlet.Combatants.Orc)
-

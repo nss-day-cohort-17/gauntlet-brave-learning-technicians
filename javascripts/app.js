@@ -104,10 +104,10 @@ $("#attackButton").click( function() {
 
   if (warriorHealthTotal > 0 && orcHealthTotal > 0){
 
-
-    var randomHurt = Math.round(Math.random()+1);
-    var warriorAD = ((Math.round(((warrior.strength + (warrior.class.strengthBonus/2))/3)) + (warrior.weapon.damage/randomHurt)))
-    var orcAD = ((Math.round(((orc.strength + (orc.class.strengthBonus/2))/4)) + (orc.weapon.damage/randomHurt)))
+//Much random, very dead, such hurt
+    var randomHurt = 1+Math.round(Math.random()*4);
+    var warriorAD = ((Math.round(((warrior.strength + (warrior.class.strengthBonus/5))/4)) + (warrior.weapon.damage-randomHurt)))
+    var orcAD = ((Math.round(((orc.strength + (orc.class.strengthBonus/5))/6)) + (orc.weapon.damage-randomHurt)))
 
     function damage(){
 
@@ -123,29 +123,38 @@ $("#attackButton").click( function() {
                           <h5>Character : ${warrior.class.name}</h5><h5>Weapon : ${warrior.weapon.name}</h5>`)
     $("#enemyCard").html(`<h3>Enemy :${orc.class} <h3> <h5>Health : ${orcHealthTotal}
                         <h5>Weapon : ${orc.weapon.name}</h5>`)
+    $("#battleReport").html(`<h4>You hit the orc ${orc.class} for ${warriorAD} damage!</h4>
+                          <h4>The Orc ${orc.class} hit you for ${orcAD} damage!</h4>`)
 
 
 
 
-     }else if(warriorHealthTotal <=0){
-       $('#gameOver').html(`<h2>You have been vanquished. Good luck in the next life.</h2><button id="playAgain" class="playAgain btn__text btn btn--big btn--orange">Play Again</button>`)
+     } else if(warriorHealthTotal <=0){
+
+       $('#gameOver').html(`<h2>You have been vanquished. Good luck in the next life.</h2><button id="playAgain" class="btn__text btn btn--big btn--orange">Play Again</button>`)
+
+       $("#battleReport").html(`<h4>You hit the orc ${orc.class} for ${warriorAD} damage!</h4>
+                             <h4>The Orc ${orc.class} hit you for ${orcAD} damage!</h4>`)
+
        $("#playerCard").hide()
        $("#enemyCard").hide()
        $("#attackButton").hide()
-       //$("#playAgain").show()
 
+    } else{
 
-    }else{
-       $('#gameOver').html(`<h2>You are the victor! Now, bask in your own glory.</h2><button id="playAgain" class="btn__text btn btn--big btn--orange"> Play Again</button>`)
-       $("#playerCard").hide()
-       $("#enemyCard").hide()
-       $("#attackButton").hide()
-       //$("#playAgain").show()
+       $('#gameOver').html(`<h2>You are the victor! Now, bask in your own glory.</h2><button id ="playAgain" class="btn__text"> Play Again</button>`)
+
+      $("#battleReport").html(`<h4>You hit the orc ${orc.class} for ${warriorAD} damage!</h4>
+                            <h4>The Orc ${orc.class} hit you for ${orcAD} damage!</h4>`)
+      $("#playerCard").hide()
+      $("#enemyCard").hide()
+      $("#attackButton").hide()
+
      };
      //playAgain button event
      $("#playAgain").click (function goBack() {
-  window.history.go(0);
-})
+        window.history.go(0);
+     })
   }
 });
 

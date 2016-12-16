@@ -18,7 +18,7 @@ body {
 }
 
 /* Player vs Enemy boxes */
-#playerCard, #enemyCard {
+#playerCard, #enemyCard, #battleReport {
   margin-top: 50px;
   border: 3px solid black;
   border-radius: 10px;

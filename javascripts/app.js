@@ -53,6 +53,7 @@ var warriorHealthTotal
         break;
       case "card--battleground":
         moveAlong = ($("#player-name").val() !== "");
+        //  $('#gameOver').hide()
         break;
     }
 
@@ -119,9 +120,46 @@ var orcHealthTotal = orc.health + orc.class.healthBonus
 
 // Attack button function
 $("#attackButton").click( function() {
+
   console.log("Initial Player Health: " , warriorHealthTotal)
   console.log("Initial Enemy Health: ", orcHealthTotal)
-})
+
+  var randomHurt = Math.round(Math.random()+1);
+  var warriorAD = ((Math.round(((warrior.strength + (warrior.class.strengthBonus/2))/3)) + (warrior.weapon.damage/randomHurt)))
+  var orcAD = ((Math.round(((orc.strength + (orc.class.strengthBonus/2))/4)) + (orc.weapon.damage/randomHurt)))
+
+  function damage(){
+
+    warriorHealthTotal -= orcAD;
+    orcHealthTotal -= warriorAD;
+  };
+
+damage()
+if (warriorHealthTotal > 0 && orcHealthTotal > 0){
+
+
+  $("#playerCard").html(`<h3>Player : ${warrior.playerName} </h3> <h5>Health : ${warriorHealthTotal}</h5>
+                        <h5>Character : ${warrior.class.name}</h5><h5>Weapon : ${warrior.weapon.name}</h5>`)
+  $("#enemyCard").html(`<h3>Enemy :${orc.class} <h3> <h5>Health : ${orcHealthTotal}
+                      <h5>Weapon : ${orc.weapon.name}</h5>`)
+
+
+
+
+   }else if(warriorHealthTotal <=0){
+     $('#gameOver').html('<h2>You have been vanquished. Good luck in the next life.</h2>')
+     $("#playerCard").hide()
+     $("#enemyCard").hide()
+     $("#attackButton").hide()
+
+  }else{
+     $('#gameOver').html('<h2>You are the victor! Now, bask in your own glory.</h2>')
+     $("#playerCard").hide()
+     $("#enemyCard").hide()
+     $("#attackButton").hide()
+   };
+
+});
 
 // got the intial stats of player and Enemy
 $(".getEnemy").click(function (){
@@ -135,27 +173,6 @@ $(".getEnemy").click(function (){
 
 
 
-
-
-
-// // Attack button function
-// $("#attackButton").click( function() {
-//   console.log("Initial Player Health: " , Gauntlet.Combatants.Human.health)
-//   console.log("Initial Enemy Health: ", Gauntlet.Combatants.Orc.health)
-
-
-
-//
-// function damage(){
-//   var randomHurt = Math.round(Math.random()+1);
-//   var hurtRng = (Math.round(((this.strength + (this.class.strengthBonus/2))/4)) + (this.weapon.damage/randomHurt)
-//   return hurtRng;
-// };
-//
-//
-// var warriorAD = damage(Gauntlet.Combatants.Human)
-//
-// var orcAD = damage(Gauntlet.Combatants.Orc)
 
 
 

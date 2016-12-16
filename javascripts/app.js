@@ -103,10 +103,10 @@ $("#attackButton").click( function() {
 
   if (warriorHealthTotal > 0 && orcHealthTotal > 0){
 
-
-    var randomHurt = Math.round(Math.random()+1);
-    var warriorAD = ((Math.round(((warrior.strength + (warrior.class.strengthBonus/3))/3)) + (warrior.weapon.damage/randomHurt)))
-    var orcAD = ((Math.round(((orc.strength + (orc.class.strengthBonus/3))/4)) + (orc.weapon.damage/randomHurt)))
+//Much random, very dead, such hurt
+    var randomHurt = 1+Math.round(Math.random()*4);
+    var warriorAD = ((Math.round(((warrior.strength + (warrior.class.strengthBonus/5))/4)) + (warrior.weapon.damage-randomHurt)))
+    var orcAD = ((Math.round(((orc.strength + (orc.class.strengthBonus/5))/6)) + (orc.weapon.damage-randomHurt)))
 
     function damage(){
 
